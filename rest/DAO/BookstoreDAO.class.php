@@ -34,6 +34,13 @@ class BookstoreDAO {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getByID($table,$id){ 
+        $stmt=$this->conn->prepare("SELECT * FROM $table WHERE id=$id");
+        $this->conn->prepare($stmt);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     
     /**
      * Function for inserting new data into a table
