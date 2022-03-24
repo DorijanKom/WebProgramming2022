@@ -34,6 +34,12 @@ class BookstoreDAO {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function get_All(){ 
+        $stmt=$this->conn->prepare("SELECT * FROM Books");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     
     /**
      * Function for inserting new data into a table
