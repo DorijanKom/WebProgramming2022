@@ -9,15 +9,17 @@ require_once ('DAO/BooksDAO.class.php');
 
 flight::register('booksDAO','BooksDAO');
 
+/**
+ * The following are methods for basic CRUD operations implemented in flight
+ */
 
 flight::route('GET /books',function(){
-    $books=flight::booksDAO()->getAll();
-    flight::json($books);
+    flight::json(flight::booksDAO()->getAll());
 });
 
-flight::route('GET /books/$id',function($id){
-    $books=flight::booksDAO()->getByID($id);
-    flight::json($books);
+
+flight::route('GET /books/@id',function($id){
+    flight::json(flight::booksDAO()->getByID($id));
 });
 
 Flight::start();
