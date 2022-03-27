@@ -34,15 +34,20 @@ class BookstoreDAO {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function get_All(){ 
-        $stmt=$this->conn->prepare("SELECT * FROM Books");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    /**
+     *  Function returns elements by ID
+     */
+    
+    public function getByID($table,$id){ 
+        $stmt=$this->conn->prepare("SELECT * FROM :table WHERE id=:id");
+        $stmt->execute(['table'=>$table,'id'=>$id]);
+        return @reset($stmt->fetchAll(PDO::FETCH_ASSOC));
     }
 
     
     /**
      * Function for inserting new data into a table
+     * Made through string concatination
      */
     public function add($table,$params){
         //INSERT INTO Users(User_Name, User_Last_Name, User_email, User_Role) 
