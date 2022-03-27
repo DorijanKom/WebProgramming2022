@@ -1,4 +1,7 @@
 <?php
+
+    require_once ('DAO/BaseDAO.class.php');
+
     class UsersDAO extends BaseDAO{
     /**
      * Function for returning all of the elements from a table
