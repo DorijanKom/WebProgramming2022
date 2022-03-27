@@ -6,10 +6,13 @@ error_reporting(E_ALL);
 
 require '../vendor/autoload.php';
 require_once 'DAO/BaseDAO.class.php';
+require_once 'DAO/BooksDAO.class.php';
 
+flight::register('booksDAO','BooksDAO');
 
-flight::request('GET /books ',function(){
-    
+flight::route('GET /books',function(){
+    $books=flight::booksDAO()->getAll();
+    flight::json($books);
 });
 
 Flight::start();
