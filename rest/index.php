@@ -8,12 +8,8 @@ require '../vendor/autoload.php';
 require_once 'DAO/BaseDAO.class.php';
 
 
-Flight::route('/', function(){
-    echo 'helsslo world!';
-});
-
-Flight::route('/abc', function(){
-    echo 'helsslo world! abc';
+flight::request('GET /books ',function(){
+    
 });
 
 Flight::start();
