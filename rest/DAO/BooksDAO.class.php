@@ -3,7 +3,8 @@
     require_once ('DAO/BaseDAO.class.php');
 
     class BooksDAO extends BaseDAO{    
-     /**
+     
+    /**
      * Function for returning all of the elements from a table
      */
     public function getAll(){ 

@@ -24,12 +24,18 @@ class BaseDAO {
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
     }
 
-    //TEST
-    public function query($query){
+    /**
+     *  Used for sending a query with its paramaters
+     */
+    public function query($query, $params){
     $stmt = $this->conn->prepare($query);
-    $stmt->execute();
+    $stmt->execute($params);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    /**
+     *  Used for sending a query for unique entries in the database
+    */
     public function queryUnique($query, $params){
     $results= $this->conn->prepare($query);
     $results->execute($params);

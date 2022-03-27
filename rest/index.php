@@ -15,5 +15,10 @@ flight::route('GET /books',function(){
     flight::json($books);
 });
 
+flight::route('GET /books/$id',function($id){
+    $books=flight::booksDAO()->getByID($id);
+    flight::json($books);
+});
+
 Flight::start();
 ?>
