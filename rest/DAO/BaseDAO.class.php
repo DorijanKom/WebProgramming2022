@@ -24,7 +24,16 @@ class BaseDAO {
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
     }
 
-    
-    
+    //TEST
+    public function query($query){
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function queryUnique($query, $params){
+    $results= $this->conn->prepare($query);
+    $results->execute($params);
+    return $results->fetchAll(PDO::FETCH_ASSOC);
+  } 
 }
 ?>
