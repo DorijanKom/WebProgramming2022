@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 */
 class BaseDAO {
     
-    private $conn;
+    protected $conn;
     
     /**
      * Constructor for BookstoreDAO
