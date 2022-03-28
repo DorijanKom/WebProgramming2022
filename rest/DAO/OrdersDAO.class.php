@@ -50,7 +50,7 @@
      *  Function for deleting data from a table
     */
     public function delete($id){
-        $stmt="DELETE FROM Orders WHERE id=$id";
+        $stmt="DELETE FROM Orders WHERE id=:id";
         $result=$this->conn->prepare($stmt);
         $result->execute(['id'=>$id]);
     }

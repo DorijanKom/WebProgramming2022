@@ -44,14 +44,13 @@
         $stmt=substr($stmt,0,-1);
         $stmt.=")";
         $this->conn->prepare($stmt)->execute($params);
-        
     }
 
     /** 
      *  Function for deleting data from a table
     */
     public function delete($id){
-        $stmt="DELETE FROM Books WHERE id=$id";
+        $stmt="DELETE FROM Books WHERE id=:id";
         $result=$this->conn->prepare($stmt);
         $result->execute(['id'=>$id]);
     }
