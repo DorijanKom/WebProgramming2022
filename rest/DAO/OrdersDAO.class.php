@@ -52,7 +52,7 @@
     public function delete($id){
         $stmt="DELETE FROM Orders WHERE id=$id";
         $result=$this->conn->prepare($stmt);
-        $result->execute();
+        $result->execute(['id'=>$id]);
     }
 
     /**

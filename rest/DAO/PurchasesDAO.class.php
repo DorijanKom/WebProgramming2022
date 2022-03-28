@@ -31,7 +31,7 @@
         //INSERT INTO Users(User_Name, User_Last_Name, User_email, User_Role) 
         //VALUES (Nihad, Sevelija, nidjo@suveli.wtf, babo)
         
-        $stmt="INSERT INTO Purchas (";
+        $stmt="INSERT INTO Purchase (";
         foreach($params as $key=>$value){
         $stmt.=" ".$key.",";
         }
@@ -52,7 +52,7 @@
     public function delete($id){
         $stmt="DELETE FROM Purchas WHERE id=$id";
         $result=$this->conn->prepare($stmt);
-        $result->execute();
+        $result->execute(['id'=>$id]);
     }
 
     /**

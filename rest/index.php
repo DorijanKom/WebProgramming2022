@@ -7,19 +7,33 @@ error_reporting(E_ALL);
 require ('../vendor/autoload.php');
 require_once ('DAO/BooksDAO.class.php');
 
-flight::register('booksDAO','BooksDAO');
+Flight::register('booksDAO','BooksDAO');
 
 /**
  * The following are methods for basic CRUD operations implemented in flight
  */
 
-flight::route('GET /books',function(){
-    flight::json(flight::booksDAO()->getAll());
+
+/**
+ *  Returns all items from the table
+ */
+Flight::route('GET /books',function(){
+    Flight::json(Flight::booksDAO()->getAll());
 });
 
+/**
+ *  Returns one from the table by ID
+ */
+Flight::route('GET /books/@id',function($id){
+    Flight::json(Flight::booksDAO()->getByID($id));
+});
 
-flight::route('GET /books/@id',function($id){
-    flight::json(flight::booksDAO()->getByID($id));
+/**
+ *  Adds new data to the table
+ */
+Flight::route('POST /books', function(){
+    $request=Flight::request();
+    Flight::booksDAO()->add($request->data->getData());
 });
 
 Flight::start();

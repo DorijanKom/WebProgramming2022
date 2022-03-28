@@ -53,7 +53,7 @@
     public function delete($id){
         $stmt="DELETE FROM Books WHERE id=$id";
         $result=$this->conn->prepare($stmt);
-        $result->execute();
+        $result->execute(['id'=>$id]);
     }
 
     /**
