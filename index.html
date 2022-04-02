@@ -7,9 +7,25 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-    
+    <main>
+        <div class="container marketing" style="margin-top: 100px;">
+            <div id="book-list" class="row">
+                <div class="col-lg-4">
+                    <h2></h2>
+                    <p></p>
+                    <p><a href="#" class="btn btn-secondary"></a></p>
+                </div>
+            </div>
+    </main>
 </body>
 <script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script>
+    $.get("rest/books",function(data){
+
+        console.log(data)
+        alert("Load was performed");
+    });
+</script>
 </html>
 
