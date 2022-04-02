@@ -22,9 +22,19 @@
 <script src="js/jquery-3.6.0.min.js"></script>
 <script>
     $.get("rest/books",function(data){
+        $("#book-list").html("");
 
-        console.log(data)
-        alert("Load was performed");
+        var html="";
+        for(let i=0;i<data.length;i++){
+
+            html+=`
+            <div class="col-lg-4">
+                <h2></h2>
+                <p></p>
+                <p><a href="#" class="btn btn-secondary"></a></p>
+            </div>`;
+        }
+        $("#book-list").html(html);
     });
 </script>
 </html>
