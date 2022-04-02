@@ -17,10 +17,6 @@
                     </div>
                 </div>
             </div>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-             Launch demo modal
-            </button>
     </main>
 </body>
 
@@ -30,7 +26,7 @@
 
 <!--AJAX Requests-->
 <script>
-    $.get("rest/books",function(data){
+    $.get('rest/books',function(data){
         $("#book-list").html("");
 
         var html="";
@@ -40,18 +36,23 @@
             <div class="col-lg-4">
                 <h2>`+data[i].Book_Name+`</h2>
                 <p>`+data[i].Date_of_Publishing+`</p>
-                <p><a href="#" class="btn btn-secondary">View Info</a></p>
+                <p><button type="button" class="btn btn-primary" onclick="showModal(`+data[i].id+`)">
+             View Info
+            </button></p>
             </div>`;
         }
         $("#book-list").html(html);
     });
+    function showModal(id){
+        $.get('rest/books/'+id,function(data){
+            console.log(data);
+            $("#exampleModal .modal-body").html(id);
+            $("#exampleModal").modal("show")
+        })
+    }
 </script>
 
 <!--Modals-->
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
