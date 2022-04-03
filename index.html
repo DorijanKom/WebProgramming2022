@@ -26,7 +26,24 @@
 
 <!--AJAX Requests-->
 <script>
-    $.get('rest/books',function(data){
+    
+    getBooks();
+    
+    function showModal(id){
+        $.get('rest/books/'+id,function(data){
+            console.log(data);
+            //$("#exampleModal .modal-body").html(id);
+            $("#id").val(data.id);
+            $("#bookName").val(data.Book_Name);
+            $("#writerid").val(data.Writer_ID);
+            $("#dateofPublishing").val(data.Date_of_Publishing);
+            $("#price").val(data.Book_price);
+            $("#exampleModal").modal("show")
+        })
+    }
+
+    function getBooks(){
+      $.get('rest/books',function(data){
         $("#book-list").html("");
 
         var html="";
@@ -43,18 +60,6 @@
         }
         $("#book-list").html(html);
     });
-    
-    function showModal(id){
-        $.get('rest/books/'+id,function(data){
-            console.log(data);
-            //$("#exampleModal .modal-body").html(id);
-            $("#id").val(data.id);
-            $("#bookName").val(data.Book_Name);
-            $("#writerid").val(data.Writer_ID);
-            $("#dateofPublishing").val(data.Date_of_Publishing);
-            $("#price").val(data.Book_price);
-            $("#exampleModal").modal("show")
-        })
     }
 
     function saveBooks(){
@@ -72,6 +77,7 @@
         dataType:'json',
         success: function(result){
           $("exampleModal").modal("hide");
+          getBooks();
         }
       })
     }
