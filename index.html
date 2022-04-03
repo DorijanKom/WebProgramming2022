@@ -30,6 +30,7 @@
     getBooks();
     
     function showModal(id){
+        $(".books-button").attr("disabled",true);
         $.get('rest/books/'+id,function(data){
             console.log(data);
             //$("#exampleModal .modal-body").html(id);
@@ -39,6 +40,7 @@
             $("#dateofPublishing").val(data.Date_of_Publishing);
             $("#price").val(data.Book_price);
             $("#exampleModal").modal("show")
+            $(".books-button").attr("disabled",false);
         })
     }
 
@@ -53,7 +55,7 @@
             <div class="col-lg-4">
                 <h2>`+data[i].Book_Name+`</h2>
                 <p>`+data[i].Date_of_Publishing+`</p>
-                <p><button type="button" class="btn btn-primary" onclick="showModal(`+data[i].id+`)">
+                <p><button type="button" class="btn btn-primary books-button" onclick="showModal(`+data[i].id+`)">
              View Info
             </button></p>
             </div>`;
@@ -63,6 +65,7 @@
     }
 
     function saveBooks(){
+      $(".books-button").attr("disabled",true);
       var books={};
       books.Book_Name=$("#bookName").val();
       books.Writer_ID=$("#writerid").val();
@@ -77,6 +80,7 @@
         dataType:'json',
         success: function(result){
           $("#exampleModal").modal("hide");
+          $(".books-button").attr("disabled",false);
           $('#book-list').html(`<div id="book-list" class="row">
                 <div class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
