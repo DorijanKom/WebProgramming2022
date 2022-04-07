@@ -10,13 +10,10 @@
 <body>
     <main>
     </div>
-      <div style="margin-top: 50px;">
+        <div class="container marketing" style="margin-top: 100px;">
           <div class="book-change" class="row">
             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElement"> Add item </button>
           </div>
-          </div>
-      </div>
-        <div class="container marketing" style="margin-top: 100px;">
             <div id="book-list" class="row">
                 <div class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
@@ -184,20 +181,34 @@
   <div class="modal fade" id="addElement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
+        <form method="post">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <input id="NewbookName" type="text">
-          <input id="Newwriterid" type="text">
-          <input id="NewdateofPublishing" type="date">
-          <input id="Newprice"type="text">
+            <div class="form-group">
+              <label>Book Name</label>
+              <input name="Book_Name" type="text" class="form-control" placeholder="Enter book name">
+            </div>
+            <div class="form-group">
+              <label>Writer ID</label>
+              <input name="Writer_ID" type="number" class="form-control" placeholder="Enter writer id">
+            </div>
+            <div class="form-group">
+              <label>Date of publishing</label>
+              <input name="Date_of_Publishing" type="date" class="form-control" placeholder="Enter date of publishing">
+            </div>
+            <div class="form-group">
+              <label>Book price</label>
+              <input name="Book_price" type="number" class="form-control" placeholder="Enter book price">
+            </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary add-button" onclick="addBooks()">Add item</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
+      </form>
       </div>
     </div>
   </div>
