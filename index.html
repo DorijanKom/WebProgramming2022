@@ -99,7 +99,11 @@
   <!--AJAX Requests-->
 <script>
     
-  $('#addBooksForm').validate();
+  $('#addBooksForm').validate({
+    submitHandler: function(form){
+      console.log($(form));
+    }
+  });
 
   getBooks();
   
