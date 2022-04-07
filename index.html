@@ -17,12 +17,18 @@
                     </div>
                 </div>
             </div>
+            <div style="margin-top: 250px;">
+                <div class="book-change" class="row">
+                  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElement"> Add item </button>
+                </div>
+            </div>
     </main>
 </body>
 
 
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
 
 <!--AJAX Requests-->
 <script>
@@ -43,6 +49,37 @@
             $(".books-button").attr("disabled",false);
         })
     }
+
+    function addBooks(){
+      $("add-button").attr("disabled",true);
+      var books={};
+      books.Book_Name=$("#NewbookName").val();
+      books.Writer_ID=$("#Newwriterid").val();
+      books.Date_of_Publishing=$("#NewdateofPublishing").val();
+      books.Book_price=$("#Newprice").val();
+
+      $.ajax({
+        url:'rest/books',
+        type:'POST',
+        data:JSON.stringify(books),
+        contentType:'application/json',
+        dataType:'json',
+        success:function(result){
+          $("#addElement").modal("hide");
+          $("#add-button").attr("disabled",false);
+          $('#book-list').html(`<div id="book-list" class="row">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                      <span class="sr-only"></span>
+                    </div>
+                </div>
+            </div>`);
+          getBooks();
+          console.log(result);
+        }
+      })
+      }
+
 
     function getBooks(){
       $.get('rest/books',function(data){
@@ -92,11 +129,15 @@
         }
       })
     }
+
+    function deleteBooks(){
+      $(".books-button").attr("disabled",true);
+    }
 </script>
 
 <!--Modals-->
   
-  <!-- Modal -->
+  <!-- Modal-Edit_Books -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -114,6 +155,28 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-primary" onclick="saveBooks()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal-Add-Books -->
+  <div class="modal fade" id="addElement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input id="NewbookName" type="text">
+          <input id="Newwriterid" type="text">
+          <input id="NewdateofPublishing" type="date">
+          <input id="Newprice"type="text">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="addBooks()">Add item</button>
         </div>
       </div>
     </div>
