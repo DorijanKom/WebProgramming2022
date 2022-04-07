@@ -9,17 +9,19 @@
 
 <body>
     <main>
+    </div>
+      <div style="margin-top: 50px;">
+          <div class="book-change" class="row">
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElement"> Add item </button>
+          </div>
+          </div>
+      </div>
         <div class="container marketing" style="margin-top: 100px;">
             <div id="book-list" class="row">
                 <div class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
                       <span class="sr-only"></span>
                     </div>
-                </div>
-            </div>
-            <div style="margin-top: 250px;">
-                <div class="book-change" class="row">
-                  <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElement"> Add item </button>
                 </div>
             </div>
     </main>
@@ -58,6 +60,7 @@
       books.Date_of_Publishing=$("#NewdateofPublishing").val();
       books.Book_price=$("#Newprice").val();
 
+
       $.ajax({
         url:'rest/books',
         type:'POST',
@@ -65,8 +68,6 @@
         contentType:'application/json',
         dataType:'json',
         success:function(result){
-          $("#addElement").modal("hide");
-          $("#add-button").attr("disabled",false);
           $('#book-list').html(`<div id="book-list" class="row">
                 <div class="d-flex justify-content-center">
                     <div class="spinner-border" role="status">
@@ -74,6 +75,8 @@
                     </div>
                 </div>
             </div>`);
+          $("#addElement").modal("hide");
+          $(".add-button").attr("disabled",false);
           getBooks();
           console.log(result);
         }
@@ -92,9 +95,12 @@
             <div class="col-lg-4">
                 <h2>`+data[i].Book_Name+`</h2>
                 <p>`+data[i].Date_of_Publishing+`</p>
-                <p><button type="button" class="btn btn-primary books-button" onclick="showModal(`+data[i].id+`)">
-             View Info
-            </button></p>
+                <p>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary books-button" onclick="showModal(`+data[i].id+`)">View Info</button>
+                        <button type="button" class="btn btn-danger books-button" onclick="deleteBooks(`+data[i].id+`)">Delete</button>
+                    </div>
+            </p>
             </div>`;
         }
         $("#book-list").html(html);
@@ -130,8 +136,22 @@
       })
     }
 
-    function deleteBooks(){
+    function deleteBooks(id){
       $(".books-button").attr("disabled",true);
+      $.ajax({
+        url:'rest/books/'+id,
+        type:'DELETE',
+        success: function(result){
+          $('#book-list').html(`<div id="book-list" class="row">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                      <span class="sr-only"></span>
+                    </div>
+                </div>
+            </div>`)
+            getBooks();
+        }
+      })
     }
 </script>
 
@@ -176,7 +196,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="addBooks()">Add item</button>
+          <button type="button" class="btn btn-primary add-button" onclick="addBooks()">Add item</button>
         </div>
       </div>
     </div>
