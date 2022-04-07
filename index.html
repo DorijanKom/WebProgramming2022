@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bookstore</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+      .error{
+        color: red;
+      }
+    </style>
 </head>
 
 <body>
@@ -29,128 +34,6 @@
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/jquery.validate.min.js"></script>
 
-<!--AJAX Requests-->
-<script>
-    
-    getBooks();
-    
-    function showModal(id){
-        $(".books-button").attr("disabled",true);
-        $.get('rest/books/'+id,function(data){
-            console.log(data);
-            //$("#exampleModal .modal-body").html(id);
-            $("#id").val(data.id);
-            $("#bookName").val(data.Book_Name);
-            $("#writerid").val(data.Writer_ID);
-            $("#dateofPublishing").val(data.Date_of_Publishing);
-            $("#price").val(data.Book_price);
-            $("#exampleModal").modal("show")
-            $(".books-button").attr("disabled",false);
-        })
-    }
-
-    function addBooks(){
-      $("add-button").attr("disabled",true);
-      var books={};
-      books.Book_Name=$("#NewbookName").val();
-      books.Writer_ID=$("#Newwriterid").val();
-      books.Date_of_Publishing=$("#NewdateofPublishing").val();
-      books.Book_price=$("#Newprice").val();
-
-
-      $.ajax({
-        url:'rest/books',
-        type:'POST',
-        data:JSON.stringify(books),
-        contentType:'application/json',
-        dataType:'json',
-        success:function(result){
-          $('#book-list').html(`<div id="book-list" class="row">
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
-                      <span class="sr-only"></span>
-                    </div>
-                </div>
-            </div>`);
-          $("#addElement").modal("hide");
-          $(".add-button").attr("disabled",false);
-          getBooks();
-          console.log(result);
-        }
-      })
-      }
-
-
-    function getBooks(){
-      $.get('rest/books',function(data){
-        $("#book-list").html("");
-
-        var html="";
-        for(let i=0;i<data.length;i++){
-
-            html+=`
-            <div class="col-lg-4">
-                <h2>`+data[i].Book_Name+`</h2>
-                <p>`+data[i].Date_of_Publishing+`</p>
-                <p>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-primary books-button" onclick="showModal(`+data[i].id+`)">View Info</button>
-                        <button type="button" class="btn btn-danger books-button" onclick="deleteBooks(`+data[i].id+`)">Delete</button>
-                    </div>
-            </p>
-            </div>`;
-        }
-        $("#book-list").html(html);
-    });
-    }
-
-    function saveBooks(){
-      $(".books-button").attr("disabled",true);
-      var books={};
-      books.Book_Name=$("#bookName").val();
-      books.Writer_ID=$("#writerid").val();
-      books.Date_of_Publishing=$("#dateofPublishing").val();
-      books.Book_price=$("#price").val();
-
-      $.ajax({
-        url:'rest/books/'+$("#id").val(),
-        type:'PUT',
-        data:JSON.stringify(books),
-        contentType:'application/json',
-        dataType:'json',
-        success: function(result){
-          $("#exampleModal").modal("hide");
-          $(".books-button").attr("disabled",false);
-          $('#book-list').html(`<div id="book-list" class="row">
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
-                      <span class="sr-only"></span>
-                    </div>
-                </div>
-            </div>`)
-          getBooks();
-        }
-      })
-    }
-
-    function deleteBooks(id){
-      $(".books-button").attr("disabled",true);
-      $.ajax({
-        url:'rest/books/'+id,
-        type:'DELETE',
-        success: function(result){
-          $('#book-list').html(`<div id="book-list" class="row">
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
-                      <span class="sr-only"></span>
-                    </div>
-                </div>
-            </div>`)
-            getBooks();
-        }
-      })
-    }
-</script>
 
 <!--Modals-->
   
@@ -181,7 +64,7 @@
   <div class="modal fade" id="addElement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form method="post">
+        <form id="addBooksForm">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -189,19 +72,19 @@
         <div class="modal-body">
             <div class="form-group">
               <label>Book Name</label>
-              <input name="Book_Name" type="text" class="form-control" placeholder="Enter book name">
+              <input name="Book_Name" type="text" class="form-control required" placeholder="Enter book name">
             </div>
             <div class="form-group">
               <label>Writer ID</label>
-              <input name="Writer_ID" type="number" class="form-control" placeholder="Enter writer id">
+              <input name="Writer_ID" type="number" class="form-control required" placeholder="Enter writer id">
             </div>
             <div class="form-group">
               <label>Date of publishing</label>
-              <input name="Date_of_Publishing" type="date" class="form-control" placeholder="Enter date of publishing">
+              <input name="Date_of_Publishing" type="date" class="form-control required" placeholder="Enter date of publishing">
             </div>
             <div class="form-group">
               <label>Book price</label>
-              <input name="Book_price" type="number" class="form-control" placeholder="Enter book price">
+              <input name="Book_price" type="number" class="form-control required" placeholder="Enter book price">
             </div>
         </div>
         <div class="modal-footer">
@@ -212,5 +95,130 @@
       </div>
     </div>
   </div>
+
+  <!--AJAX Requests-->
+<script>
+    
+  $('#addBooksForm').validate();
+
+  getBooks();
+  
+  function showModal(id){
+      $(".books-button").attr("disabled",true);
+      $.get('rest/books/'+id,function(data){
+          console.log(data);
+          //$("#exampleModal .modal-body").html(id);
+          $("#id").val(data.id);
+          $("#bookName").val(data.Book_Name);
+          $("#writerid").val(data.Writer_ID);
+          $("#dateofPublishing").val(data.Date_of_Publishing);
+          $("#price").val(data.Book_price);
+          $("#exampleModal").modal("show")
+          $(".books-button").attr("disabled",false);
+      })
+  }
+
+  function addBooks(){
+    $("add-button").attr("disabled",true);
+    var books={};
+    books.Book_Name=$("#NewbookName").val();
+    books.Writer_ID=$("#Newwriterid").val();
+    books.Date_of_Publishing=$("#NewdateofPublishing").val();
+    books.Book_price=$("#Newprice").val();
+
+
+    $.ajax({
+      url:'rest/books',
+      type:'POST',
+      data:JSON.stringify(books),
+      contentType:'application/json',
+      dataType:'json',
+      success:function(result){
+        $('#book-list').html(`<div id="book-list" class="row">
+              <div class="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                  </div>
+              </div>
+          </div>`);
+        $("#addElement").modal("hide");
+        $(".add-button").attr("disabled",false);
+        getBooks();
+        console.log(result);
+      }
+    })
+    }
+
+  function getBooks(){
+    $.get('rest/books',function(data){
+      $("#book-list").html("");
+
+      var html="";
+      for(let i=0;i<data.length;i++){
+
+          html+=`
+          <div class="col-lg-4">
+              <h2>`+data[i].Book_Name+`</h2>
+              <p>`+data[i].Date_of_Publishing+`</p>
+              <p>
+                  <div class="btn-group" role="group">
+                      <button type="button" class="btn btn-primary books-button" onclick="showModal(`+data[i].id+`)">View Info</button>
+                      <button type="button" class="btn btn-danger books-button" onclick="deleteBooks(`+data[i].id+`)">Delete</button>
+                  </div>
+          </p>
+          </div>`;
+      }
+      $("#book-list").html(html);
+  });
+  }
+
+  function saveBooks(){
+    $(".books-button").attr("disabled",true);
+    var books={};
+    books.Book_Name=$("#bookName").val();
+    books.Writer_ID=$("#writerid").val();
+    books.Date_of_Publishing=$("#dateofPublishing").val();
+    books.Book_price=$("#price").val();
+
+    $.ajax({
+      url:'rest/books/'+$("#id").val(),
+      type:'PUT',
+      data:JSON.stringify(books),
+      contentType:'application/json',
+      dataType:'json',
+      success: function(result){
+        $("#exampleModal").modal("hide");
+        $(".books-button").attr("disabled",false);
+        $('#book-list').html(`<div id="book-list" class="row">
+              <div class="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                  </div>
+              </div>
+          </div>`)
+        getBooks();
+      }
+    })
+  }
+
+  function deleteBooks(id){
+    $(".books-button").attr("disabled",true);
+    $.ajax({
+      url:'rest/books/'+id,
+      type:'DELETE',
+      success: function(result){
+        $('#book-list').html(`<div id="book-list" class="row">
+              <div class="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                  </div>
+              </div>
+          </div>`)
+          getBooks();
+      }
+    })
+  }
+  
+</script>
 </html>
 
