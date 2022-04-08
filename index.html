@@ -33,6 +33,7 @@
 <script src="js/bootstrap.bundle.min.js"></script>
 <script src="js/jquery-3.6.0.min.js"></script>
 <script src="js/jquery.validate.min.js"></script>
+<script src="js/booksService.js"></script>
 
 
 <!--Modals-->
@@ -54,7 +55,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="saveBooks()">Save changes</button>
+          <button type="button" class="btn btn-primary" onclick="BookService.update()">Save changes</button>
         </div>
       </div>
     </div>
@@ -98,151 +99,8 @@
 
   <!--AJAX Requests-->
 <script>
-    
-  $('#addBooksForm').validate({
-    submitHandler: function(form){ 
-      
-      var books = Object.fromEntries((new FormData(form)).entries())
 
-      $.ajax({
-      url:'rest/books',
-      type:'POST',
-      data:JSON.stringify(books),
-      contentType:'application/json',
-      dataType:'json',
-      success:function(result){
-        $('#book-list').html(`<div id="book-list" class="row">
-              <div class="d-flex justify-content-center">
-                  <div class="spinner-border" role="status">
-                    <span class="sr-only"></span>
-                  </div>
-              </div>
-          </div>`);
-        $("#addElement").modal("hide");
-        getBooks();
-        console.log(result);
-      }
-    })
-    }
-  });
-
-  getBooks();
-  
-  function showModal(id){
-      $(".books-button").attr("disabled",true);
-      $.get('rest/books/'+id,function(data){
-          console.log(data);
-          //$("#exampleModal .modal-body").html(id);
-          $("#id").val(data.id);
-          $("#bookName").val(data.Book_Name);
-          $("#writerid").val(data.Writer_ID);
-          $("#dateofPublishing").val(data.Date_of_Publishing);
-          $("#price").val(data.Book_price);
-          $("#exampleModal").modal("show")
-          $(".books-button").attr("disabled",false);
-      })
-  }
-
- /* function addBooks(){
-    $("add-button").attr("disabled",true);
-    var books={};
-    books.Book_Name=$("#NewbookName").val();
-    books.Writer_ID=$("#Newwriterid").val();
-    books.Date_of_Publishing=$("#NewdateofPublishing").val();
-    books.Book_price=$("#Newprice").val();
-
-
-    $.ajax({
-      url:'rest/books',
-      type:'POST',
-      data:JSON.stringify(books),
-      contentType:'application/json',
-      dataType:'json',
-      success:function(result){
-        $('#book-list').html(`<div id="book-list" class="row">
-              <div class="d-flex justify-content-center">
-                  <div class="spinner-border" role="status">
-                    <span class="sr-only"></span>
-                  </div>
-              </div>
-          </div>`);
-        $("#addElement").modal("hide");
-        $(".add-button").attr("disabled",false);
-        getBooks();
-        console.log(result);
-      }
-    })
-    }*/
-
-  function getBooks(){
-    $.get('rest/books',function(data){
-      $("#book-list").html("");
-
-      var html="";
-      for(let i=0;i<data.length;i++){
-
-          html+=`
-          <div class="col-lg-4">
-              <h2>`+data[i].Book_Name+`</h2>
-              <p>`+data[i].Date_of_Publishing+`</p>
-              <p>
-                  <div class="btn-group" role="group">
-                      <button type="button" class="btn btn-primary books-button" onclick="showModal(`+data[i].id+`)">View Info</button>
-                      <button type="button" class="btn btn-danger books-button" onclick="deleteBooks(`+data[i].id+`)">Delete</button>
-                  </div>
-          </p>
-          </div>`;
-      }
-      $("#book-list").html(html);
-  });
-  }
-
-  function saveBooks(){
-    $(".books-button").attr("disabled",true);
-    var books={};
-    books.Book_Name=$("#bookName").val();
-    books.Writer_ID=$("#writerid").val();
-    books.Date_of_Publishing=$("#dateofPublishing").val();
-    books.Book_price=$("#price").val();
-
-    $.ajax({
-      url:'rest/books/'+$("#id").val(),
-      type:'PUT',
-      data:JSON.stringify(books),
-      contentType:'application/json',
-      dataType:'json',
-      success: function(result){
-        $("#exampleModal").modal("hide");
-        $(".books-button").attr("disabled",false);
-        $('#book-list').html(`<div id="book-list" class="row">
-              <div class="d-flex justify-content-center">
-                  <div class="spinner-border" role="status">
-                    <span class="sr-only"></span>
-                  </div>
-              </div>
-          </div>`)
-        getBooks();
-      }
-    })
-  }
-
-  function deleteBooks(id){
-    $(".books-button").attr("disabled",true);
-    $.ajax({
-      url:'rest/books/'+id,
-      type:'DELETE',
-      success: function(result){
-        $('#book-list').html(`<div id="book-list" class="row">
-              <div class="d-flex justify-content-center">
-                  <div class="spinner-border" role="status">
-                    <span class="sr-only"></span>
-                  </div>
-              </div>
-          </div>`)
-          getBooks();
-      }
-    })
-  }
+  BookService.init();
   
 </script>
 </html>
