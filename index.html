@@ -1,1 +1,134 @@
-DORO
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookstore</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+      .error{
+        color: red;
+      }
+    </style>
+</head>
+
+<body>
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Carousel</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+            </ul>
+            <form class="d-flex">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-warning" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+    </div>
+        <div class="container marketing" style="margin-top: 100px;">
+          <div class="book-change" class="row">
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElement"> Add item </button>
+          </div>
+            <div id="book-list" class="row">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                      <span class="sr-only"></span>
+                    </div>
+                </div>
+            </div>
+    </main>
+</body>
+
+
+<script src="js/bootstrap.bundle.min.js"></script>
+<script src="js/jquery-3.6.0.min.js"></script>
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/booksService.js"></script>
+
+
+<!--Modals-->
+  
+  <!-- Modal-Edit_Books -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <input id="id" type="hidden">
+          <input id="bookName" type="text">
+          <input id="writerid" type="text">
+          <input id="dateofPublishing" type="text">
+          <input id="price" type="text">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="BookService.update()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal-Add-Books -->
+  <div class="modal fade" id="addElement" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form id="addBooksForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <label>Book Name</label>
+              <input name="Book_Name" type="text" class="form-control required" placeholder="Enter book name">
+            </div>
+            <div class="form-group">
+              <label>Writer ID</label>
+              <input name="Writer_ID" type="number" class="form-control required" placeholder="Enter writer id">
+            </div>
+            <div class="form-group">
+              <label>Date of publishing</label>
+              <input name="Date_of_Publishing" type="date" class="form-control required" placeholder="Enter date of publishing">
+            </div>
+            <div class="form-group">
+              <label>Book price</label>
+              <input name="Book_price" type="number" class="form-control required" placeholder="Enter book price">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+  <!--AJAX Requests-->
+<script>
+
+  BookService.init();
+  
+</script>
+</html>
+
