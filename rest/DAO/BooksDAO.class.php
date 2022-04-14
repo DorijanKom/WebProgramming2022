@@ -1,77 +1,34 @@
 <?php
     
-    require_once ('DAO/BaseDAO.class.php');
+    require_once __DIR__.'DAO/BaseDAO.class.php';
 
     class BooksDAO extends BaseDAO{    
      
-    /**
-     * Function for returning all of the elements from a table
-     */
-    public function getAll(){ 
-        $stmt=$this->conn->prepare("SELECT * FROM Books");
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    /**
-     *  Function returns elements by ID
-     */
-    
-    public function getByID($id){ 
-        $stmt=$this->conn->prepare("SELECT * FROM Books WHERE id=:id");
-        $stmt->execute(['id'=>$id]);
-        return @reset($stmt->fetchAll(PDO::FETCH_ASSOC));
-    }
-
-    
-    /**
-     * Function for inserting new data into a table
-     * Made through string concatination
-     */
-    public function add($params){
-        //INSERT INTO Users(User_Name, User_Last_Name, User_email, User_Role) 
-        //VALUES (Nihad, Sevelija, nidjo@suveli.wtf, babo)
-        
-        $stmt="INSERT INTO Books (";
-        foreach($params as $key=>$value){
-        $stmt.=" ".$key.",";
+        public function __construct()
+        {
+            parent::__construct("Books");
         }
-        $stmt=substr($stmt,0,-1);
-        $stmt.=") VALUES (";
-        foreach($params as $key=>$value){
-        $stmt.=" :".$key.",";
-        }
-        $stmt=substr($stmt,0,-1);
-        $stmt.=")";
-        $this->conn->prepare($stmt)->execute($params);
-    }
 
-    /** 
-     *  Function for deleting data from a table
-    */
-    public function delete($id){
-        $stmt="DELETE FROM Books WHERE id=:id";
-        $result=$this->conn->prepare($stmt);
-        $result->execute(['id'=>$id]);
-    }
+        public function get_books_with_writer_names(){
+            /**SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+            FROM Orders
+            INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID; */
 
-    /**
-     *  Function for updating data in a table
-     */
-    public function update($params,$id){
-        /** UPDATE table_name
-          * SET column1=value, column2=value2,...
-          * WHERE some_column=some_value
-          * UPDATE $table SET (col1=val1,col2=val2,..) WHERE id=$id  
-         */
-        $stmt="UPDATE Books SET ";
-        foreach($params as $key=>$value){
-            $stmt .= " " .$key ." = :". $key .", ";
+            $stm="SELECT b.Book_Name, w.Writer_Name, w.Writer_Last_Name, b.Date_of_Publishing, b.Book_price ";
+            $stm.="FROM Books b ";
+            $stm.="JOIN Writers w ON b.Writer_ID=w.id";
+            $result=$this->conn->prepare($stm);
+            $result->execute();
+            return $result->fetchAll(PDO::FETCH_ASSOC);
         }
-        $stmt=substr($stmt,0,-2);
-        $stmt.=" WHERE id=$id";
-        $result=$this->conn->prepare($stmt);
-        $result->execute($params);
-    }
+
+
+        public function get_books_by_writer_name($writer_name,$writer_last_name){
+            $stm=$this->get_books_with_writer_names();
+            $stm.=" WHERE w.Writer_Name=':writer_name' AND w.Writer_Last_Name=':writer_last_name'";
+            $result=$this->conn->prepare($stm);
+            $result->execute(['writer_name'=>$writer_name,'writer_last_name'=>$writer_last_name]);
+            return @reset($result->fetchAll(PDO::FETCH_ASSOC));
+        }
 }
 ?>
