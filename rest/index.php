@@ -13,6 +13,9 @@ Flight::register('ordersDAO','OrdersDAO');
 Flight::register('writersDAO','WritersDAO');
 Flight::register('usersDAO','UsersDAO');
 
+Flight::map('error', function(Exception $e){
+    Flight::json(['message'=> $e->getMessage()], 500);
+});
 
 require __DIR__.'/Routes/BooksRoutes.php';
 
