@@ -29,7 +29,7 @@ class BaseDAO {
      * Function for returning all of the elements from a table
      */
     public function getAll(){ 
-      $stmt=$this->conn->prepare("SELECT * FROM ".$this->table_name);
+      $stmt = $this->conn->prepare("SELECT * FROM ".$this->table_name);
       $stmt->execute();
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -39,9 +39,10 @@ class BaseDAO {
      */
     
     public function getByID($id){ 
-      $stmt=$this->conn->prepare("SELECT * FROM ".$this->table_name." WHERE id=:id");
-      $stmt->execute(['id'=>$id]);
-      return @reset($stmt->fetchAll(PDO::FETCH_ASSOC));
+      $stmt=$this->conn->prepare("SELECT * FROM ".$this->table_name." WHERE id = :id");
+      $stmt->execute([':id'=>$id]);
+      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      return @reset($result);
     }
 
     /**
@@ -52,25 +53,27 @@ class BaseDAO {
       //INSERT INTO Users(User_Name, User_Last_Name, User_email, User_Role) 
       //VALUES (Nihad, Sevelija, nidjo@suveli.wtf, babo)
       
-      $stmt="INSERT INTO ".$this->table_name." (";
+      $stmt = "INSERT INTO ".$this->table_name." (";
       foreach($params as $key=>$value){
-      $stmt.=" ".$key.",";
+      $stmt .= " ".$key.",";
       }
-      $stmt=substr($stmt,0,-1);
-      $stmt.=") VALUES (";
+      $stmt = substr($stmt,0,-1);
+      $stmt .= ") VALUES (";
       foreach($params as $key=>$value){
-      $stmt.=" :".$key.",";
+      $stmt .= " :".$key.",";
       }
-      $stmt=substr($stmt,0,-1);
-      $stmt.=")";
+      $stmt = substr($stmt,0,-1);
+      $stmt .= ")";
       $this->conn->prepare($stmt)->execute($params);
+      $params['id'] = $this->conn->lastInsertId();
+      return $params;
     }
 
     /** 
      *  Function for deleting data from a table
     */
     public function delete($id){
-      $stmt=$this->conn->prepare("DELETE FROM ".$this->table_name." WHERE id=:id");
+      $stmt = $this->conn->prepare("DELETE FROM ".$this->table_name." WHERE id=:id");
       $stmt->bindParam(':id',$id);
       $stmt->execute();
     }
@@ -84,13 +87,13 @@ class BaseDAO {
         * WHERE some_column=some_value
         * UPDATE $table SET (col1=val1,col2=val2,..) WHERE id=$id  
        */
-      $stmt="UPDATE ".$this->table_name." SET ";
+      $stmt = "UPDATE ".$this->table_name." SET ";
       foreach($params as $key=>$value){
           $stmt .= " " .$key ." = :". $key .", ";
       }
-      $stmt=substr($stmt,0,-2);
-      $stmt.=" WHERE id=$id";
-      $result=$this->conn->prepare($stmt);
+      $stmt = substr($stmt,0,-2);
+      $stmt .= " WHERE id=$id";
+      $result = $this->conn->prepare($stmt);
       $result->execute($params);
     }
 
@@ -107,7 +110,7 @@ class BaseDAO {
      *  Used for sending a query for unique entries in the database
     */
     protected function queryUnique($query, $params){
-    $results= $this->query($query,$params);
+    $results = $this->query($query,$params);
     return reset($results);
   } 
 }

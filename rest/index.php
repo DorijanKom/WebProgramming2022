@@ -14,7 +14,7 @@ Flight::register('writersDAO','WritersDAO');
 Flight::register('usersDAO','UsersDAO');
 
 
-require __DIR__.'/routes/BooksRoutes';
+require __DIR__.'/Routes/BooksRoutes.php';
 
 
 Flight::start();

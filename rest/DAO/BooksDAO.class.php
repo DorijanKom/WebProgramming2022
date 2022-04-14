@@ -14,9 +14,10 @@
             FROM Orders
             INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID; */
 
-            $stm="SELECT b.Book_Name, w.Writer_Name, w.Writer_Last_Name, b.Date_of_Publishing, b.Book_price ";
+            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, b.Date_of_Publishing, b.Book_price ";
             $stm.="FROM Books b ";
-            $stm.="JOIN Writers w ON b.Writer_ID=w.id";
+            $stm.="JOIN Writers w ON b.Writer_ID=w.id ";
+            $stm.="ORDER BY id";
             $result=$this->conn->prepare($stm);
             $result->execute();
             return $result->fetchAll(PDO::FETCH_ASSOC);
