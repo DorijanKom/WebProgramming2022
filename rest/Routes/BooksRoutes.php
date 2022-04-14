@@ -1,5 +1,5 @@
 <?php
-Flight::register('booksDAO','BooksDAO');
+
 
 /**
  * The following are methods for basic CRUD operations implemented in flight
@@ -10,7 +10,7 @@ Flight::register('booksDAO','BooksDAO');
  *  Returns all items from the table
  */
 Flight::route('GET /books',function(){
-    Flight::json(Flight::booksDAO()->getAll());
+    Flight::json(Flight::booksDAO()->get_books_with_writer_names());
 });
 
 /**
