@@ -1,6 +1,6 @@
 <?php
 
-    require_once __DIR__-'/BaseService.php';
+    require_once __DIR__.'/BaseService.class.php';
     require_once __DIR__.'/../DAO/PurchasesDAO.class.php';
 
     class PurchasesService extends BaseService {
