@@ -6,7 +6,7 @@
         
         public function __construct()
         {
-            parent::__construct("Purchases");    
+            parent::__construct("Purchase");    
         }
     }
 ?>

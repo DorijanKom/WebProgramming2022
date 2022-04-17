@@ -6,9 +6,13 @@ error_reporting(E_ALL);
 
 require_once __DIR__.'/../vendor/autoload.php';
 require_once __DIR__.'/Services/BooksService.class.php';
+require_once __DIR__.'/Services/OrdersService.class.php';
+require_once __DIR__.'/Services/PurchasesService.class.php';
+require_once __DIR__.'/Services/UsersService.class.php';
+require_once __DIR__.'/Services/WritersService.class.php';
 
 Flight::register('booksDAO','BooksDAO');
-Flight::register('purchasesDAO','PurchasesDAO');
+Flight::register('purchasesDAO','PurchaseDAO');
 Flight::register('ordersDAO','OrdersDAO');
 Flight::register('writersDAO','WritersDAO');
 Flight::register('usersDAO','UsersDAO');

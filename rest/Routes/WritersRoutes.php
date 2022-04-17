@@ -10,7 +10,7 @@
  *  Returns all items from the table
  */
 Flight::route('GET /writers',function(){
-    Flight::json(Flight::writerssDAO()->getAll());
+    Flight::json(Flight::writersDAO()->getAll());
 });
 
 /**
