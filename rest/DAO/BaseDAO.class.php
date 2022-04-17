@@ -14,7 +14,7 @@ class BaseDAO {
     /**
      * Constructor for BookstoreDAO
      */
-    public function __construct()
+    public function __construct($table_name)
     {
         $servername = "127.0.0.1";
         $username = "root";
@@ -39,17 +39,17 @@ class BaseDAO {
      */
     
     public function getByID($id){ 
-      $stmt=$this->conn->prepare("SELECT * FROM ".$this->table_name." WHERE id = :id");
-      $stmt->execute([':id'=>$id]);
+      $stmt = $this->conn->prepare("SELECT * FROM ".$this->table_name." WHERE id = :id");
+      $stmt->execute(['id' => $id]);
       $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      return @reset($result);
+      return reset($result);
     }
 
     /**
      * Function for inserting new data into a table
      * Made through string concatination
      */
-    public function add($params){
+    protected function exec_add($params){
       //INSERT INTO Users(User_Name, User_Last_Name, User_email, User_Role) 
       //VALUES (Nihad, Sevelija, nidjo@suveli.wtf, babo)
       
@@ -81,7 +81,7 @@ class BaseDAO {
     /**
      *  Function for updating data in a table
      */
-    public function update($params,$id){
+    protected function exec_update($params,$id){
       /** UPDATE table_name
         * SET column1=value, column2=value2,...
         * WHERE some_column=some_value
@@ -113,5 +113,13 @@ class BaseDAO {
     $results = $this->query($query,$params);
     return reset($results);
   } 
+
+    public function add($params){
+      $this->exec_add($params);
+    }
+
+    public function update($params, $id){
+      $this->exec_update($params, $id);
+    }
 }
 ?>
