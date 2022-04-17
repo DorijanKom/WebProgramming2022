@@ -16,6 +16,7 @@ class BaseDAO {
      */
     public function __construct($table_name)
     {
+        $this->table_name = $table_name;
         $servername = "127.0.0.1";
         $username = "root";
         $password = "4@ERbR2gSa6yLg";
@@ -39,10 +40,10 @@ class BaseDAO {
      */
     
     public function getByID($id){ 
-      $stmt = $this->conn->prepare("SELECT * FROM ".$this->table_name." WHERE id = :id");
-      $stmt->execute(['id' => $id]);
-      $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-      return reset($result);
+    $stmt = $this->conn->prepare("SELECT * FROM ".$this->table_name." WHERE id = :id");
+    $stmt->execute(['id' => $id]);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return reset($result);
     }
 
     /**
