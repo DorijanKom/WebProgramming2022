@@ -17,7 +17,11 @@ Flight::map('error', function(Exception $e){
     Flight::json(['message'=> $e->getMessage()], 500);
 });
 
-require __DIR__.'/Routes/BooksRoutes.php';
+require_once __DIR__.'/Routes/BooksRoutes.php';
+require_once __DIR__.'/Routes/PurchasesRoutes.php';
+require_once __DIR__.'/Routes/OrdersRoutes.php';
+require_once __DIR__.'/Routes/UsersRoutes.php';
+require_once __DIR__.'/Routes/WritersRoutes.php';
 
 
 Flight::start();
