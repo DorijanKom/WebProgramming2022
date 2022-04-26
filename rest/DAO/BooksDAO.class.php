@@ -26,7 +26,10 @@
 
         public function get_books_by_writer_name($writer_name,$writer_last_name){
             
-            $stm=$this->get_books_with_writer_names();
+            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, b.Date_of_Publishing, b.Book_price ";
+            $stm.="FROM Books b ";
+            $stm.="JOIN Writers w ON b.Writer_ID=w.id ";
+            $stm.="ORDER BY id";
             
             if($writer_name==null){
                 $stm.=" WHERE w.Writer_Last_Name=':writer_last_name'";
@@ -53,6 +56,16 @@
             $stm.=" WHERE b.Date_of_Publishing=':pub_date'";
             $result=$this->conn->prepare($stm);
             $result->execute(['pub_date'=>$pub_date]);
+            return @reset($result->fetchAll(PDO::FETCH_ASSOC));
+        }
+
+        public function get_by_id_with_writer_names($id){
+            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, b.Date_of_Publishing, b.Book_price ";
+            $stm.="FROM Books b ";
+            $stm.="JOIN Writers w ON b.Writer_ID=w.id ";
+            $stm.="WHERE b.id = :id";
+            $result = $this->conn->prepare($stm);
+            $result->execute(['id'=>$id]);
             return @reset($result->fetchAll(PDO::FETCH_ASSOC));
         }
 }

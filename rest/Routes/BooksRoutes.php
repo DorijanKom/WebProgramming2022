@@ -17,7 +17,7 @@ Flight::route('GET /books',function(){
  *  Returns one from the table by ID
  */
 Flight::route('GET /books/@id',function($id){
-    Flight::json(Flight::booksDAO()->getByID($id));
+    Flight::json(Flight::booksDAO()->get_by_id_with_writer_names($id));
 });
 
 /**
