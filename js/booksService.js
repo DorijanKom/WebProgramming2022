@@ -21,8 +21,8 @@ var BookService = {
                 <div class="card" style="width: 18rem;">
                     <img class="card-img-top" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbanner2.kisspng.com%2F20180422%2Fvzq%2Fkisspng-drawing-book-sketch-5adcf25816d295.9076212715244294000935.jpg&f=1&nofb=1" alt="Card image cap">
                     <div class="card-body">
-                        <h4 class="card-title">`+data[i].Book_Name+`</h4>
-                        <h6 class="card-title">`+data[i].Date_of_Publishing+`</h6>
+                        <h4 class="card-title">`+data[i].first_name+`</h4>
+                        <h4 class="card-title">`+data[i].last_name+`</h6>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <div class="btn-group" role="group">
                             <button type="button" class="btn btn-primary books-button" onclick="BookService.get(`+data[i].id+`)">View Info</button>
