@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookit.com</title>
+    <title>Librarian.com</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
       .error{
@@ -17,7 +17,7 @@
     <header>
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Bookit.com</a>
+          <a class="navbar-brand" href="#">Librarian.com</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -103,12 +103,16 @@
         </div>
         <div class="modal-body">
             <div class="form-group">
-              <label>Book Name</label>
-              <input name="Book_Name" type="text" class="form-control required" placeholder="Enter book name">
+              <label for="bookName" class="form-label">Book Name</label>
+              <input name="Book_Name" type="text" id="bookName" class="form-control required" placeholder="Enter book name">
             </div>
             <div class="form-group">
-              <label>Writer ID</label>
-              <input name="Writer_ID" type="number" class="form-control required" placeholder="Enter writer id">
+              <label for="writerName" class="form-label">Writer Name</label>
+              <input name="Writer_Name" type="text" id="writerName" class="form-control required" placeholder="Enter writer name">
+            </div>
+            <div class="form-group">
+              <label for="writerLastName" class="form-label">Writer Last Name</label>
+              <input name="Writer_Last_Name" type="text" id="writerLastName" class="form-control required" placeholder="Enter writer last name">
             </div>
             <div class="form-group">
               <label>Date of publishing</label>

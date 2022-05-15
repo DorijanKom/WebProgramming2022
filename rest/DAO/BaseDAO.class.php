@@ -3,6 +3,9 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+require_once __DIR__.'/../Config.class.php';
+
 /** 
  * Class for executing db functions
 */
@@ -17,11 +20,14 @@ class BaseDAO {
     public function __construct($table_name)
     {
         $this->table_name = $table_name;
-        $servername = "127.0.0.1";
-        $username = "root";
-        $password = "4@ERbR2gSa6yLg";
-        $schema = "Bookstore";
-        $this->conn = new PDO("mysql:host=$servername;dbname=$schema", $username, $password);
+        
+        $servername = Config::DB_HOST();
+        $username = Config::DB_USERNAME();
+        $password = Config::DB_PASSWORD();
+        $schema = Config::DB_SCHEME();
+        $port = Config::DB_PORT();
+        
+        $this->conn = new PDO("mysql:host=$servername;dbname=$schema;port=$port", $username, $password);
         // set the PDO error mode to exception
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
     }
@@ -82,7 +88,7 @@ class BaseDAO {
     /**
      *  Function for updating data in a table
      */
-    protected function exec_update($params,$id){
+    protected function execUpdate($params,$id){
       /** UPDATE table_name
         * SET column1=value, column2=value2,...
         * WHERE some_column=some_value
@@ -120,7 +126,7 @@ class BaseDAO {
     }
 
     public function update($params, $id){
-      $this->exec_update($params, $id);
+      $this->execUpdate($params, $id);
     }
 }
 ?>
