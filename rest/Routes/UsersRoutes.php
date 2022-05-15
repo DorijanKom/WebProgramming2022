@@ -50,21 +50,23 @@
     Flight::route('POST /login',function(){
         $login = Flight::request()->data->getData();
 
-        print_r($login);
+        $user = Flight::usersDAO()->getUserByEmail($login['email']);
 
-        $key = 'example_key';
-        $payload = [
-            'iss' => 'http://example.org',
-            'aud' => 'http://example.com',
-            'iat' => 1356999524,
-            'nbf' => 1357000000
-        ];
-        
-        $jwt = JWT::encode($payload, $key, 'HS256');
-        $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
+        if(isset($user['id'])){
 
-        print_r($jwt);
-        
-        print_r($decoded);
+            if($user['password'] == md5($login['password'])){
+                
+                unset($user['password']); //Deletes pw from user object so that it isn't encoded inside of the token
+                $jwt = JWT::encode($user, Config::JWT_SECRET(), 'HS256');
+                Flight::json(['token' => $jwt]);
+
+            }else{
+                
+                Flight::json(["message" => "Incorrect password"], 404);
+            }
+        }else{
+            
+            Flight::json(["message" => "User doesn't exist"], 404);
+        }
     })
 ?>
