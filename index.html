@@ -35,7 +35,7 @@
             </ul>
             <form class="d-flex">
               <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-warning" type="submit">Search</button>
+              <button class="btn btn-outline-warning" type="submit" onclick="localStorage.clear()">Logout</button>
             </form>
           </div>
         </div>
@@ -135,8 +135,13 @@
   <!--AJAX Requests-->
 <script>
 
-  BookService.init();
-  
+  var token = localStorage.getItem("token");
+  if (token){
+    BookService.init();
+  }
+  else{
+    window.location.replace("login.html");
+  }
 </script>
 </html>
 
