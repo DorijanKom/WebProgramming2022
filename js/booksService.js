@@ -47,7 +47,13 @@ var BookService = {
 
     get: function(id){
         $(".books-button").attr("disabled",true);
-        $.get('rest/books/'+id,function(data){
+        $.ajax({
+          url: "rest/books/"+id,
+          type: "GET",
+          beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+          },
+          success: function(data){
             console.log(data);
             //$("#exampleModal .modal-body").html(id);
             $("#id").val(data.id);
@@ -58,6 +64,11 @@ var BookService = {
             $("#price").val(data.Book_price);
             $("#exampleModal").modal("show")
             $(".books-button").attr("disabled",false);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            toastr.error(XMLHttpRequest.responseJSON.message);
+            usersService.logout();
+          }
         })
     },
 
@@ -68,6 +79,9 @@ var BookService = {
             data:JSON.stringify(books),
             contentType:'application/json',
             dataType:'json',
+            beforeSend: function(xhr){
+              xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+            },
             success:function(result){
               $('#book-list').html(`<div id="book-list" class="row">
                     <div class="d-flex justify-content-center">
@@ -88,6 +102,9 @@ var BookService = {
     $.ajax({
       url:'rest/books/'+id,
       type:'DELETE',
+      beforeSend: function(xhr){
+        xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+      },
       success: function(result){
         $('#book-list').html(`<div id="book-list" class="row">
               <div class="d-flex justify-content-center">
@@ -97,6 +114,10 @@ var BookService = {
               </div>
           </div>`)
           BookService.list();
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        toastr.error(XMLHttpRequest.responseJSON.message);
+        usersService.logout();
       }
     })
     },
@@ -115,6 +136,9 @@ var BookService = {
           data:JSON.stringify(books),
           contentType:'application/json',
           dataType:'json',
+          beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+          },
           success: function(result){
             $("#exampleModal").modal("hide");
             $(".books-button").attr("disabled",false);
@@ -126,6 +150,10 @@ var BookService = {
                   </div>
               </div>`)
               BookService.list();
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            toastr.error(XMLHttpRequest.responseJSON.message);
+            usersService.logout();
           }
         })
     }
