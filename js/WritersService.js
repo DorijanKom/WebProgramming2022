@@ -3,16 +3,16 @@ var WritersService = {
         $('#addWritersForm').validate({
             submitHandler: function(form){ 
                 var writers = Object.fromEntries((new FormData(form)).entries())
-                BookService.add(writers);
+                WritersService.add(writers);
               }
         })
     },
 
     add: function(writers){
         $.ajax({
-            url:'rest/books',
+            url:'rest/writers',
             type:'POST',
-            data:JSON.stringify(books),
+            data:JSON.stringify(writers),
             contentType:'application/json',
             dataType:'json',
             beforeSend: function(xhr){
