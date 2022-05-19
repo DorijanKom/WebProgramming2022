@@ -46,7 +46,8 @@
     </div>
         <div class="container marketing" style="margin-top: 100px;">
           <div class="book-change" class="row">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElement"> Add item </button>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
+            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElementWriter" style="margin-bottom: 10px"> Add Writer </button>
           </div>
             <div id="book-list" class="row">
                 <div class="d-flex justify-content-center">
@@ -99,7 +100,7 @@
       <div class="modal-content">
         <form id="addBooksForm">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Books</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -132,6 +133,34 @@
       </div>
     </div>
   </div>
+
+    <!-- Modal-Add-Writers -->
+    <div class="modal fade" id="addElementWriter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="addWritersForm">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Writer</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="writerName" class="form-label">Writer Name</label>
+                <input name="Writer_Name" type="text" id="writerName" class="form-control required" placeholder="Enter writer name">
+              </div>
+              <div class="form-group">
+                <label for="writerLastName" class="form-label">Writer Last Name</label>
+                <input name="Writer_Last_Name" type="text" id="writerLastName" class="form-control required" placeholder="Enter writer last name">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
 
 <script>
 
