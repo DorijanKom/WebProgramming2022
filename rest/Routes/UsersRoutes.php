@@ -9,9 +9,11 @@
      */
 
 
-    /**
-     *  Returns all items from the table
-     */
+/**
+ * @OA\Get(path="/users/", tags={"users"}, summary="Returns all users from the api. ", security={{"ApiKeyAuth": {}}},
+ *      @OA\Response( response=200, description="List of users")
+ *  )
+ */
     Flight::route('GET /users',function(){
         Flight::json(Flight::usersDAO()->getAll());
     });
@@ -45,6 +47,29 @@
 
     /**
      * JWT authentication
+     */
+
+    /**
+     * @OA\Post(
+     *     path="/login",
+     *     description="Login to the system",
+     *     tags={"JWT"},
+     *     @OA\RequestBody(description="Basic user info", required=true,
+     *       @OA\MediaType(mediaType="application/json",
+     *    			@OA\Schema(
+     *    				@OA\Property(property="email", type="string", example="dorijan.komsic@stu.ibu.edu.ba",	description="Email"),
+     *    				@OA\Property(property="password", type="string", example="12345",	description="Password" )
+     *          )
+     *     )),
+     *     @OA\Response(
+     *         response=200,
+     *         description="JWT token on successful response",
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="unauthorized",
+     *     )
+     * )
      */
 
     Flight::route('POST /login',function(){

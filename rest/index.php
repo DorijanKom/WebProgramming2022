@@ -27,7 +27,7 @@ Flight::map('error', function(Exception $e){
 Flight::route('/*', function(){
 
     $path = Flight::request()->url;
-    if ($path == '/login') return TRUE;
+    if ($path == '/login' || $path == '/docs.json') return TRUE;
   
     $headers = getallheaders();
     if (@!$headers['Authorization']){
@@ -44,6 +44,13 @@ Flight::route('/*', function(){
       }
     }
   });
+
+  // REST api documentation end-point
+  Flight::route('GET /docs.json',function(){
+    $openapi = \OpenApi\Generator::scan(['Routes']);
+    header('Content-Type: application/json');
+    echo $openapi->toJson();
+});
 
 require_once __DIR__.'/Routes/BooksRoutes.php';
 require_once __DIR__.'/Routes/PurchasesRoutes.php';

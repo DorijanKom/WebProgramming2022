@@ -7,14 +7,8 @@
 
 
 /**
- * @OA\Get(
- *      path="/sample/",
- *      tags={"sample"},
- *      summary="Sample endpoint to test the functionality of Flight and Swagger. ",
- *      @OA\Response(
- *          response=200,
- *          description="A sample response."
- *      )
+ * @OA\Get(path="/books/", tags={"books"}, summary="Returns all books from the api. ", security={{"ApiKeyAuth": {}}},
+ *      @OA\Response(response=200,description="List of books")
  * )
  */
 Flight::route('GET /books',function(){
@@ -22,7 +16,10 @@ Flight::route('GET /books',function(){
 });
 
 /**
- *  Returns one from the table by ID
+ * @OA\Get(path="/books/{id}", tags={"books"}, security={{"ApiKeyAuth": {}}},
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of book"),
+ *     @OA\Response(response="200", description="Fetch individual book")
+ * )
  */
 Flight::route('GET /books/@id',function($id){
     Flight::json(Flight::booksDAO()->get_by_id_with_writer_names($id));
