@@ -7,7 +7,15 @@
 
 
 /**
- *  Returns all items from the table
+ * @OA\Get(
+ *      path="/sample/",
+ *      tags={"sample"},
+ *      summary="Sample endpoint to test the functionality of Flight and Swagger. ",
+ *      @OA\Response(
+ *          response=200,
+ *          description="A sample response."
+ *      )
+ * )
  */
 Flight::route('GET /books',function(){
     Flight::json(Flight::booksDAO()->get_books_with_writer_names());
