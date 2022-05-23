@@ -30,7 +30,10 @@ Flight::route('GET /books/@id',function($id){
  */
 Flight::route('POST /books', function(){
     $request=Flight::request();
-    Flight::booksDAO()->add($request->data->getData());
+    //Flight::booksDAO()->add($request->data->getData());
+    $data=$request->data->getData();
+    print_r($data);
+    die;
     Flight::json(['message' => 'updated']);
 });
 
