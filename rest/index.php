@@ -11,6 +11,7 @@ require_once __DIR__.'/Services/PurchasesService.class.php';
 require_once __DIR__.'/Services/UsersService.class.php';
 require_once __DIR__.'/Services/WritersService.class.php';
 
+Flight::register('booksService','BooksService');
 Flight::register('booksDAO','BooksDAO');
 Flight::register('purchasesDAO','PurchaseDAO');
 Flight::register('ordersDAO','OrdersDAO');

@@ -6,36 +6,36 @@ error_reporting(E_ALL);
 
 require_once __DIR__.'/../Config.class.php';
 
-/** 
+/**
  * Class for executing db functions
 */
 class BaseDAO {
-    
+
     protected $conn;
     private $table_name;
-    
+
     /**
      * Constructor for BookstoreDAO
      */
     public function __construct($table_name)
     {
         $this->table_name = $table_name;
-        
+
         $servername = Config::DB_HOST();
         $username = Config::DB_USERNAME();
         $password = Config::DB_PASSWORD();
         $schema = Config::DB_SCHEME();
         $port = Config::DB_PORT();
-        
+
         $this->conn = new PDO("mysql:host=$servername;dbname=$schema;port=$port", $username, $password);
         // set the PDO error mode to exception
-        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     /**
      * Function for returning all of the elements from a table
      */
-    public function getAll(){ 
+    public function getAll(){
       $stmt = $this->conn->prepare("SELECT * FROM ".$this->table_name);
       $stmt->execute();
       return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -44,8 +44,8 @@ class BaseDAO {
     /**
      *  Function returns elements by ID
      */
-    
-    public function getByID($id){ 
+
+    public function getByID($id){
     $stmt = $this->conn->prepare("SELECT * FROM ".$this->table_name." WHERE id = :id");
     $stmt->execute(['id' => $id]);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -57,9 +57,9 @@ class BaseDAO {
      * Made through string concatination
      */
     protected function exec_add($params){
-      //INSERT INTO Users(User_Name, User_Last_Name, User_email, User_Role) 
+      //INSERT INTO Users(User_Name, User_Last_Name, User_email, User_Role)
       //VALUES (Nihad, Sevelija, nidjo@suveli.wtf, babo)
-      
+
       $stmt = "INSERT INTO ".$this->table_name." (";
       foreach($params as $key=>$value){
       $stmt .= " ".$key.",";
@@ -76,7 +76,7 @@ class BaseDAO {
       return $params;
     }
 
-    /** 
+    /**
      *  Function for deleting data from a table
     */
     public function delete($id){
@@ -92,7 +92,7 @@ class BaseDAO {
       /** UPDATE table_name
         * SET column1=value, column2=value2,...
         * WHERE some_column=some_value
-        * UPDATE $table SET (col1=val1,col2=val2,..) WHERE id=$id  
+        * UPDATE $table SET (col1=val1,col2=val2,..) WHERE id=$id
        */
       $stmt = "UPDATE ".$this->table_name." SET ";
       foreach($params as $key=>$value){
@@ -119,10 +119,10 @@ class BaseDAO {
     protected function queryUnique($query, $params){
     $results = $this->query($query,$params);
     return reset($results);
-  } 
+  }
 
     public function add($params){
-      $this->exec_add($params);
+      return $this->exec_add($params);
     }
 
     public function update($params, $id){
