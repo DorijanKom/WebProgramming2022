@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.28, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.29, for Linux (x86_64)
 --
 -- Host: localhost    Database: Bookstore
 -- ------------------------------------------------------
--- Server version	8.0.28
+-- Server version	8.0.29
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -40,7 +40,7 @@ CREATE TABLE `Books` (
 
 LOCK TABLES `Books` WRITE;
 /*!40000 ALTER TABLE `Books` DISABLE KEYS */;
-INSERT INTO `Books` VALUES (1,'Dune',2,'2021-10-14',29),(2,'Dreamcatcher',1,'2011-08-25',21.99),(4,'Red Rising',3,'2015-06-10',24.99),(17,'Son of Gold',3,'2022-03-30',20),(18,'MorningStar',3,'2022-03-27',24.99),(39,'IT',1,'2022-04-02',14.99);
+INSERT INTO `Books` VALUES (1,'Dune',2,'2021-10-14',29),(2,'Dreamcatcher',1,'2011-08-25',24.99),(4,'Red Rising',3,'2015-06-10',24.99),(17,'Son of Gold',3,'2022-03-30',20),(18,'MorningStar',3,'2022-03-27',24.99);
 /*!40000 ALTER TABLE `Books` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,6 +117,7 @@ CREATE TABLE `Users` (
   `User_Last_Name` varchar(100) DEFAULT NULL,
   `User_email` varchar(100) DEFAULT NULL,
   `User_Role` varchar(100) DEFAULT NULL,
+  `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -127,7 +128,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (1,'Dorijan','Komšić','dorijan.komsic@stu.ibu.edu.ba','Admin'),(2,'Arijan','Komšić','arijan.komsic@stu.ibu.edu.ba','Employee');
+INSERT INTO `Users` VALUES (1,'Dorijan','Komšić','dorijan.komsic@stu.ibu.edu.ba','Admin','827ccb0eea8a706c4c34a16891f84e7b'),(2,'Arijan','Komšić','arijan.komsic@stu.ibu.edu.ba','Employee','01cfcd4f6b8770febfb40cb906715822');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -143,7 +144,7 @@ CREATE TABLE `Writers` (
   `Writer_Name` varchar(100) DEFAULT NULL,
   `Writer_Last_Name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -152,7 +153,7 @@ CREATE TABLE `Writers` (
 
 LOCK TABLES `Writers` WRITE;
 /*!40000 ALTER TABLE `Writers` DISABLE KEYS */;
-INSERT INTO `Writers` VALUES (1,'Stephen','King'),(2,'Frank','Herbert'),(3,'Pierce','Brown');
+INSERT INTO `Writers` VALUES (1,'Stephen','King'),(2,'Frank','Herbert'),(3,'Pierce','Brown'),(12,'J.D','Salinger');
 /*!40000 ALTER TABLE `Writers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,4 +170,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-27 12:10:25
+-- Dump completed on 2022-05-23  9:41:55
