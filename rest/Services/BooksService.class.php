@@ -48,7 +48,7 @@
           if (!isset($writer['id'])){
             $writer = $this->writerDao->add(['Writer_Name' => $bookDescriptor['Writer_Name'], 'Writer_Last_Name' => $bookDescriptor['Writer_Last_Name']]);
           }
-
+          // no publisher in DB add it
           if (!isset($publisher['id'])){
             $publisher = $this->writerDao->add(['name' => $bookDescriptor['name']]);
 
