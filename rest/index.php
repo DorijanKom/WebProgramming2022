@@ -30,7 +30,7 @@ Flight::map('error', function(Exception $e){
 Flight::route('/*', function(){
 
     $path = Flight::request()->url;
-    if ($path == '/login' || $path == '/docs.json') return TRUE;
+    if ($path == '/login' || $path == '/docs.json' || $path == '/test/*') return TRUE;
   
     $headers = getallheaders();
     if (@!$headers['Authorization']){

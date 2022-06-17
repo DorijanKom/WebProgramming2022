@@ -62,10 +62,12 @@
         }
 
         public function get_by_id_with_writer_names($id){
-            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, b.Year_of_publishing, b.Book_price ";
+            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, p.name, b.Year_of_publishing, b.Book_price, b.In_inventory ";
             $stm.="FROM Books b ";
-            $stm.="JOIN Writers w ON b.Writer_ID=w.id ";
-            $stm.="WHERE b.id = :id";
+            $stm.="LEFT OUTER JOIN BooksAndWriters baw ON b.id = baw.bookid ";
+            $stm.="LEFT OUTER JOIN Writers w ON baw.writerid = w.id ";
+            $stm.="JOIN Publishers p ON p.id = b.Publisher ";
+            $stm.="WHERE b.id = :id ";
             $result = $this->conn->prepare($stm);
             $result->execute(['id'=>$id]);
             return @reset($result->fetchAll(PDO::FETCH_ASSOC));

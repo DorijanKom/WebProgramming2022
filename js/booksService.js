@@ -129,8 +129,10 @@ var BookService = {
         var books={};
         books.Book_Name=$("#bookName").val();
         books.Writer_ID=$("#writerid").val();
+        books.Publisher=$("#publisher").val();
         books.Year_of_publishing=$("#YearOfPublishing").val();
         books.Book_price=$("#price").val();
+        books.In_inventory=$("#inventory").val();
     
         $.ajax({
           url:'rest/books/'+$("#id").val(),
