@@ -14,10 +14,12 @@
             FROM Orders
             INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID; */
 
-            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, b.Date_of_Publishing, b.Book_price ";
+            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, p.name, b.Year_of_publishing, b.Book_price, b.In_inventory ";
             $stm.="FROM Books b ";
-            $stm.="JOIN Writers w ON b.Writer_ID=w.id ";
-            $stm.="ORDER BY id";
+            $stm.="LEFT OUTER JOIN BooksAndWriters baw ON b.id = baw.bookid ";
+            $stm.="LEFT OUTER JOIN Writers w ON baw.writerid = w.id ";
+            $stm.="JOIN Publishers p ON p.id = b.Publisher ";
+            $stm.="ORDER BY b.id";
             $result=$this->conn->prepare($stm);
             $result->execute();
             return $result->fetchAll(PDO::FETCH_ASSOC);
@@ -26,7 +28,7 @@
 
         public function get_books_by_writer_name($writer_name,$writer_last_name){
             
-            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, b.Date_of_Publishing, b.Book_price ";
+            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, b.Year_of_publishing, b.Book_price ";
             $stm.="FROM Books b ";
             $stm.="JOIN Writers w ON b.Writer_ID=w.id ";
             $stm.="ORDER BY id";
@@ -53,14 +55,14 @@
         public function get_by_publishing_year($pub_date){
             
             $stm=$this->get_books_with_writer_names();
-            $stm.=" WHERE b.Date_of_Publishing=':pub_date'";
+            $stm.=" WHERE b.Year_of_publishing=':pub_date'";
             $result=$this->conn->prepare($stm);
             $result->execute(['pub_date'=>$pub_date]);
             return @reset($result->fetchAll(PDO::FETCH_ASSOC));
         }
 
         public function get_by_id_with_writer_names($id){
-            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, b.Date_of_Publishing, b.Book_price ";
+            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, b.Year_of_publishing, b.Book_price ";
             $stm.="FROM Books b ";
             $stm.="JOIN Writers w ON b.Writer_ID=w.id ";
             $stm.="WHERE b.id = :id";

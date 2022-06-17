@@ -13,6 +13,7 @@ require_once __DIR__.'/Services/OrdersService.class.php';
 require_once __DIR__.'/Services/PurchasesService.class.php';
 require_once __DIR__.'/Services/UsersService.class.php';
 require_once __DIR__.'/Services/WritersService.class.php';
+require_once __DIR__.'/Services/PublishersService.class.php';
 
 Flight::register('booksService','BooksService');
 Flight::register('booksDAO','BooksDAO');
@@ -20,6 +21,7 @@ Flight::register('purchasesDAO','PurchaseDAO');
 Flight::register('ordersDAO','OrdersDAO');
 Flight::register('writersDAO','WritersDAO');
 Flight::register('usersDAO','UsersDAO');
+Flight::register('publisherDAO','PublisherDAO');
 
 Flight::map('error', function(Exception $e){
     Flight::json(['message'=> $e->getMessage()], 500);
@@ -58,6 +60,7 @@ require_once __DIR__.'/Routes/PurchasesRoutes.php';
 require_once __DIR__.'/Routes/OrdersRoutes.php';
 require_once __DIR__.'/Routes/UsersRoutes.php';
 require_once __DIR__.'/Routes/WritersRoutes.php';
+require_once __DIR__.'/Routes/PublishersRoutes.php';
 
 
 Flight::start();

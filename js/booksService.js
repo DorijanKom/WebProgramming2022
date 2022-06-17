@@ -60,8 +60,10 @@ var BookService = {
             $("#bookName").val(data.Book_Name);
             $("#writerName").val(data.Writer_Name);
             $("#writerLastName").val(data.Writer_Last_Name);
-            $("#dateofPublishing").val(data.Date_of_Publishing);
+            $("#publisher").val(data.name);
+            $("#yearOfPublishing").val(data.Year_of_publishing);
             $("#price").val(data.Book_price);
+            $("#inventory").val(data.In_inventory)
             $("#exampleModal").modal("show")
             $(".books-button").attr("disabled",false);
           },
@@ -127,7 +129,7 @@ var BookService = {
         var books={};
         books.Book_Name=$("#bookName").val();
         books.Writer_ID=$("#writerid").val();
-        books.Date_of_Publishing=$("#dateofPublishing").val();
+        books.Year_of_publishing=$("#YearOfPublishing").val();
         books.Book_price=$("#price").val();
     
         $.ajax({
