@@ -36,7 +36,7 @@ Flight::route('POST /books', function(){
 
 Flight::route('PUT /books/@id',function($id){
     $request=Flight::request();
-    Flight::booksDAO()->updateBookAndWriter($request->data->getData(),$id);
+    Flight::booksService()->updateBookAndWriter($request->data->getData(),$id);
     Flight::json(['message' => 'updated']);
 });
 

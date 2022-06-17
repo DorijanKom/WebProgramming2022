@@ -61,6 +61,15 @@
             return @reset($result->fetchAll(PDO::FETCH_ASSOC));
         }
 
+        public function get_book_by_name($bookName){
+            $stm="SELECT b.id, b.Book_Name, b.Year_of_publishing, b.Book_price ";
+            $stm.="FROM Books b ";
+            $stm.="WHERE Book_Name = :book_name";
+            $result=$this->conn->prepare($stm);
+            $result->execute(['book_name'=>$bookName]);
+            return @reset($result->fetchAll(PDO::FETCH_ASSOC));
+        }
+
         public function get_by_id_with_writer_names($id){
             $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, p.name, b.Year_of_publishing, b.Book_price, b.In_inventory ";
             $stm.="FROM Books b ";

@@ -14,6 +14,7 @@ require_once __DIR__.'/Services/PurchasesService.class.php';
 require_once __DIR__.'/Services/UsersService.class.php';
 require_once __DIR__.'/Services/WritersService.class.php';
 require_once __DIR__.'/Services/PublishersService.class.php';
+require_once __DIR__.'/Services/BooksAndWritersService.class.php';
 
 Flight::register('booksService','BooksService');
 Flight::register('booksDAO','BooksDAO');
@@ -22,6 +23,7 @@ Flight::register('ordersDAO','OrdersDAO');
 Flight::register('writersDAO','WritersDAO');
 Flight::register('usersDAO','UsersDAO');
 Flight::register('publisherDAO','PublisherDAO');
+Flight::register('booksAndWritersDAO','BooksAndWritersDAO');
 
 Flight::map('error', function(Exception $e){
     Flight::json(['message'=> $e->getMessage()], 500);
@@ -30,7 +32,8 @@ Flight::map('error', function(Exception $e){
 Flight::route('/*', function(){
 
     $path = Flight::request()->url;
-    if ($path == '/login' || $path == '/docs.json' || $path == '/test/*') return TRUE;
+    //if ($path == '/login' || $path == '/docs.json' || $path == '/test/*') return TRUE;
+    return TRUE;
   
     $headers = getallheaders();
     if (@!$headers['Authorization']){
@@ -61,6 +64,7 @@ require_once __DIR__.'/Routes/OrdersRoutes.php';
 require_once __DIR__.'/Routes/UsersRoutes.php';
 require_once __DIR__.'/Routes/WritersRoutes.php';
 require_once __DIR__.'/Routes/PublishersRoutes.php';
+require_once __DIR__.'/Routes/BooksAndWritersRoutes.php';
 
 
 Flight::start();
