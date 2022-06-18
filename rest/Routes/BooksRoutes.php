@@ -41,6 +41,7 @@ Flight::route('PUT /books/@id',function($id){
 });
 
 Flight::route('DELETE /books/@id',function($id){
+    Flight::booksAndWritersDAO()->deleteBook($id);
     Flight::booksDAO()->delete($id);
     Flight::json(['message'=>'deleted']);
 });
