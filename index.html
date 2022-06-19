@@ -77,24 +77,47 @@
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <input id="id" type="hidden">
-          <input id="bookName" type="text">
-          <input id="writerName" type="text">
-          <input id="writerLastName" type="text">
-          <input id="publisher" type="text">
-          <input id="yearOfPublishing" type="text">
-          <input id="price" type="text">
-          <input id="inventory" type ="number"
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" onclick="BookService.update()">Save changes</button>
-        </div>
+        <form>
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input id="id" type="hidden">
+            <div class="form-group">
+              <label>Book Name</label>
+              <input name="bookName" id="bookName" type="text" class="form-control required">
+            </div>
+            <div class="form-group">
+              <label>Writer name</label>
+              <input name="writerName" id="writerName" type="text" class="form-control required">
+            </div>
+            <div class="form-group">
+              <label>Writer last name</label>
+              <input name="writerLastName" id="writerLastName" type="text" class="form-control required">
+            </div>
+            <div class="form-group">
+              <label>Publisher</label>
+              <input name="publisher" id="publisher" type="text" class="form-control required">
+            </div>
+            <div class="form-group">
+              <label>Year of Publishing</label>
+              <input name="yearOfPublishing" id="yearOfPublishing" type="text" class="form-control required">
+            </div>
+            <div class="form-group">
+              <label>Price</label>
+              <input name="price" id="price" type="text" class="form-control required">
+            </div>
+            <div class="form-group">
+              <label>Inventory</label>
+              <input name="inventory" id="inventory" type="number" class="form-control required">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" onclick="BookService.update()">Save changes</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -127,15 +150,15 @@
             </div>
             <div class="form-group">
               <label for="yearOfPublishing" class="form-label">Year of publishing</label>
-              <input name="Year_of_Publishing" type="date" id="yearOfPublishing" class="form-control required" placeholder="Enter year of publishing">
+              <input name="Year_of_Publishing" type="number" id="yearOfPublishing" class="form-control required" placeholder="Enter year of publishing">
             </div>
             <div class="form-group">
-              <label>Book price</label>
-              <input name="Book_price" type="number" class="form-control required" placeholder="Enter book price">
+              <label for="price" class="form-label">Book price</label>
+              <input name="Book_price" type="number" id="price" class="form-control required" placeholder="Enter book price">
             </div>
             <div class="form-group">
               <label for="inventory" class="form-label">In inventory</label>
-              <input name="In_inventory" type="date" id="inventory" class="form-control required" placeholder="Enter inventory amount">
+              <input name="In_inventory" type="number" id="inventory" class="form-control required" placeholder="Enter inventory amount">
             </div>
         </div>
         <div class="modal-footer">

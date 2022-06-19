@@ -12,7 +12,7 @@
  * )
  */
 Flight::route('GET /books',function(){
-    Flight::json(Flight::booksDAO()->get_books_with_writer_names());
+    Flight::json(Flight::booksService()->getBooksWithWriterNames());
 });
 
 /**

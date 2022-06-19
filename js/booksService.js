@@ -40,7 +40,7 @@ var BookService = {
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               toastr.error(XMLHttpRequest.responseJSON.message);
-              usersService.logout();
+              //usersService.logout();
             }
         });
     },
@@ -69,7 +69,7 @@ var BookService = {
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
             toastr.error(XMLHttpRequest.responseJSON.message);
-            usersService.logout();
+            //usersService.logout();
           }
         })
     },
@@ -119,7 +119,7 @@ var BookService = {
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
         toastr.error(XMLHttpRequest.responseJSON.message);
-        usersService.logout();
+        //usersService.logout();
       }
     })
     },
@@ -127,8 +127,11 @@ var BookService = {
     update: function(id){
         $(".books-button").attr("disabled",true);
         var books={};
+        books.id=$("#id").val();
         books.Book_Name=$("#bookName").val();
-        books.Writer_ID=$("#writerid").val();
+        //books.Writer_ID=$("#writerid").val();
+        books.Writer_Name=$("#writerName").val();
+        books.Writer_Last_Name=$("#writerLastName").val();
         books.Publisher=$("#publisher").val();
         books.Year_of_publishing=$("#YearOfPublishing").val();
         books.Book_price=$("#price").val();
@@ -155,10 +158,10 @@ var BookService = {
               </div>`)
               BookService.list();
           },
-          error: function(XMLHttpRequest, textStatus, errorThrown) {
+          /*error: function(XMLHttpRequest, textStatus, errorThrown) {
             toastr.error(XMLHttpRequest.responseJSON.message);
-            usersService.logout();
-          }
+            //usersService.logout();
+          }*/
         })
     }
 }
