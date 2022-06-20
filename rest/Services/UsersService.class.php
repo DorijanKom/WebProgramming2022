@@ -9,6 +9,9 @@
         {
             parent::__construct(new UsersDAO());
         }
+        public function getUserByEmail($email){
+            return $this->dao->getUserByEmail($email);
+        }
     }
 
 ?>

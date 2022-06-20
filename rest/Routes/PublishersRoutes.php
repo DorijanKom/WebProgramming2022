@@ -9,14 +9,14 @@
  *  Returns all items from the table
  */
 Flight::route('GET /publishers',function(){
-    Flight::json(Flight::publisherDAO()->getAll());
+    Flight::json(Flight::publisherService()->getAll());
 });
 
 /**
  *  Returns one from the table by ID
  */
 Flight::route('GET /publishers/@id',function($id){
-    Flight::json(Flight::publisherDAO()->getByID($id));
+    Flight::json(Flight::publisherService()->getByID($id));
 });
 
 /**
@@ -24,18 +24,18 @@ Flight::route('GET /publishers/@id',function($id){
  */
 Flight::route('POST /publishers', function(){
     $request=Flight::request();
-    Flight::publisherDAO()->add($request->data->getData());
+    Flight::publisherService()->add($request->data->getData());
     Flight::json(['message' => 'updated']);
 });
 
 Flight::route('PUT /publishers/@id',function($id){
     $request=Flight::request();
-    Flight::publisherDAO()->update($request->data->getData(),$id);
+    Flight::publisherService()->update($request->data->getData(),$id);
     Flight::json(['message' => 'updated']);
 });
 
 Flight::route('DELETE /publishers/@id',function($id){
-    Flight::publisherDAO()->delete($id);
+    Flight::publisherService()->delete($id);
     Flight::json(['message'=>'deleted']);
 });
 ?>

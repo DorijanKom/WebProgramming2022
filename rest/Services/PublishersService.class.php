@@ -9,6 +9,9 @@
         {
             parent::__construct(new PublisherDAO());
         }
-    }
 
+        public function getPublisherByName($name){
+            return $this->dao->getByPublisherName($name);
+        }
+    }
 ?>

@@ -17,13 +17,12 @@ require_once __DIR__.'/Services/PublishersService.class.php';
 require_once __DIR__.'/Services/BooksAndWritersService.class.php';
 
 Flight::register('booksService','BooksService');
-Flight::register('booksDAO','BooksDAO');
-Flight::register('purchasesDAO','PurchaseDAO');
-Flight::register('ordersDAO','OrdersDAO');
-Flight::register('writersDAO','WritersDAO');
-Flight::register('usersDAO','UsersDAO');
-Flight::register('publisherDAO','PublisherDAO');
-Flight::register('booksAndWritersDAO','BooksAndWritersDAO');
+Flight::register('booksAndWritersService','BooksAndWritersService');
+Flight::register('purchasesService','PurchasesService');
+Flight::register('ordersService','OrdersService');
+Flight::register('writersService','WritersService');
+Flight::register('usersService','UsersService');
+Flight::register('publishersService','PublishersService');
 
 Flight::map('error', function(Exception $e){
     Flight::json(['message'=> $e->getMessage()], 500);

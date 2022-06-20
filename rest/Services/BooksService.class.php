@@ -22,6 +22,10 @@
             return $this->dao->get_books_with_writer_names();
         }
 
+        public function getByIDWithWriterNames($id){
+          return $this->dao->get_by_id_with_writer_names($id);
+        }
+
         public function addBookAndWriter($bookDescriptor){
               $writer = $this->writerDao->getWriterByNames($bookDescriptor['Writer_Last_Name'], $bookDescriptor['Writer_Name']);
               $publisher = $this->publisherDAO->getByPublisherName($bookDescriptor['Publisher']);

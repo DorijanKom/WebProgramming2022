@@ -15,14 +15,14 @@
  *  )
  */
     Flight::route('GET /users',function(){
-        Flight::json(Flight::usersDAO()->getAll());
+        Flight::json(Flight::usersService()->getAll());
     });
 
     /**
      *  Returns one from the table by ID
      */
     Flight::route('GET /users/@id',function($id){
-        Flight::json(Flight::usersDAO()->getByID($id));
+        Flight::json(Flight::usersService()->getByID($id));
     });
 
     /**
@@ -30,18 +30,18 @@
      */
     Flight::route('POST /users', function(){
         $request=Flight::request();
-        Flight::usersDAO()->add($request->data->getData());
+        Flight::usersService()->add($request->data->getData());
         Flight::json(['message' => 'updated']);
     });
 
     Flight::route('PUT /users/@id',function($id){
         $request=Flight::request();
-        Flight::usersDAO()->update($request->data->getData(),$id);
+        Flight::usersService()->update($request->data->getData(),$id);
         Flight::json(['message' => 'updated']);
     });
 
     Flight::route('DELETE /users/@id',function($id){
-        Flight::usersDAO()->delete($id);
+        Flight::usersService()->delete($id);
         Flight::json(['message'=>'deleted']);
     });
 
@@ -75,7 +75,7 @@
     Flight::route('POST /login',function(){
         $login = Flight::request()->data->getData();
 
-        $user = Flight::usersDAO()->getUserByEmail($login['email']);
+        $user = Flight::usersService()->getUserByEmail($login['email']);
 
         if(isset($user['id'])){
 

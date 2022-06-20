@@ -9,6 +9,10 @@
         {
             parent::__construct(new WritersDAO());
         }
+
+        public function getWriterByNames($lastname,$firstname){
+            return $this->dao->getWriterByNames($lastname,$firstname);
+        }
     }
 
 ?>

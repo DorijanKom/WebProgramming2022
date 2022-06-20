@@ -22,7 +22,7 @@ Flight::route('GET /books',function(){
  * )
  */
 Flight::route('GET /books/@id',function($id){
-    Flight::json(Flight::booksDAO()->get_by_id_with_writer_names($id));
+    Flight::json(Flight::booksService()->getByIDWithWriterNames($id));
 });
 
 /**
@@ -41,8 +41,8 @@ Flight::route('PUT /books/@id',function($id){
 });
 
 Flight::route('DELETE /books/@id',function($id){
-    Flight::booksAndWritersDAO()->deleteBook($id);
-    Flight::booksDAO()->delete($id);
+    Flight::booksAndWritersService()->deleteBook($id);
+    Flight::booksService()->delete($id);
     Flight::json(['message'=>'deleted']);
 });
 

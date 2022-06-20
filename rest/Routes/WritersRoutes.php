@@ -10,14 +10,14 @@
  *  Returns all items from the table
  */
 Flight::route('GET /writers',function(){
-    Flight::json(Flight::writersDAO()->getAll());
+    Flight::json(Flight::writersService()->getAll());
 });
 
 /**
  *  Returns one from the table by ID
  */
 Flight::route('GET /writers/@id',function($id){
-    Flight::json(Flight::writersDAO()->getByID($id));
+    Flight::json(Flight::writersService()->getByID($id));
 });
 
 /**
@@ -25,19 +25,19 @@ Flight::route('GET /writers/@id',function($id){
  */
 Flight::route('POST /writers', function(){
     $request=Flight::request();
-    Flight::writersDAO()->add($request->data->getData());
+    Flight::writersService()->add($request->data->getData());
     Flight::json(['message' => 'updated']);
 });
 
 Flight::route('PUT /writers/@id',function($id){
     $request=Flight::request();
-    Flight::writersDAO()->update($request->data->getData(),$id);
+    Flight::writersService()->update($request->data->getData(),$id);
     Flight::json(['message' => 'updated']);
 });
 
 Flight::route('DELETE /writers/@id',function($id){
-    Flight::booksAndWritersDAO()->deleteWriter($id);
-    Flight::writersDAO()->delete($id);
+    Flight::booksAndWritersService()->deleteWriter($id);
+    Flight::writersService()->delete($id);
     Flight::json(['message'=>'deleted']);
 });
 ?>
