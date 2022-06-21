@@ -29,7 +29,7 @@
 
         public function addBookAndWriter($bookDescriptor){
               $writer = $this->writerDao->getWriterByNames($bookDescriptor['Writer_Last_Name'], $bookDescriptor['Writer_Name']);
-              $publisher = $this->publisherDAO->getByPublisherName($bookDescriptor['Publisher']);
+              $publisher = $this->publisherDAO->getByPublisherName($bookDescriptor['name']);
               // no writer in DB add it
               if (!isset($writer['id'])){
                 $writer = $this->writerDao->add(['Writer_Name' => $bookDescriptor['Writer_Name'], 'Writer_Last_Name' => $bookDescriptor['Writer_Last_Name']]);
@@ -41,7 +41,7 @@
 
               $this->dao->add(['Book_Name' => $bookDescriptor['Book_Name'],
                               'Publisher' => $publisher['id'],
-                              'Year_of_Publishing' => $bookDescriptor['Year_of_Publishing'],
+                              'Year_of_publishing' => $bookDescriptor['Year_of_publishing'],
                               'Book_price' => $bookDescriptor['Book_price'],
                               'In_inventory' => $bookDescriptor['In_inventory']]);
               
@@ -52,12 +52,13 @@
               return $book;
         }
 
-        public function updateBookAndWriter($bookDescriptor){
+        public function updateBookAndWriter($bookDescriptor,$id){
               
 
               $writer = $this->writerDao->getWriterByNames($bookDescriptor['Writer_Last_Name'], $bookDescriptor['Writer_Name']);
-              $publisher = $this->publisherDAO->getByPublisherName($bookDescriptor['Publisher']);
+              $publisher = $this->publisherDAO->getByPublisherName($bookDescriptor['name']);
               $oldBook = $this->dao->get_book_by_name($bookDescriptor['Book_Name']);
+
 
               
               // no writer in DB add it
@@ -69,14 +70,11 @@
                 $publisher = $this->publisherDAO->add(['name' => $bookDescriptor['name']]);
               }
               
-
-              print_r($bookDescriptor['id']);                  
-              die;
               $test=$this->dao->update(['Book_Name' => $bookDescriptor['Book_Name'],
                                         'Publisher' => $publisher['id'],
                                         'Year_of_publishing' => $bookDescriptor['Year_of_publishing'],
                                         'Book_price' => $bookDescriptor['Book_price'],
-                                        'In_inventory' => $bookDescriptor['In_inventory']], $bookDescriptor['id']);
+                                        'In_inventory' => $bookDescriptor['In_inventory']], $id);
                                         
               $book = $this->dao->get_book_by_name($bookDescriptor['Book_Name']);
 
