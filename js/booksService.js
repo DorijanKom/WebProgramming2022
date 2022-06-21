@@ -17,11 +17,15 @@ var BookService = {
               xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
             },
             success: function(data){
-              var html="";
+              SPApp.handleSectionVisibility("#view_books");
+              var html=`<div class="book-change" class="row">
+              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
+              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElementWriter" style="margin-bottom: 10px"> Add Writer </button>
+            </div>`;
               for(let i=0;i<data.length;i++){
         
                   html+=`
-                  <div class="col-lg-3">
+                  <div class="col-lg-3 container overflow-hidden" id="view_books">
                   <div class="card" style="width: 18rem;">
                       <img class="card-img-top" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbanner2.kisspng.com%2F20180422%2Fvzq%2Fkisspng-drawing-book-sketch-5adcf25816d295.9076212715244294000935.jpg&f=1&nofb=1" alt="Card image cap">
                       <div class="card-body">
@@ -37,7 +41,7 @@ var BookService = {
                       </div>
                       </div>`;
               }
-              $("#book-list").html(html);
+              $("#view_books").html(html);
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               toastr.error(XMLHttpRequest.responseJSON.message);
@@ -133,7 +137,7 @@ var BookService = {
         //books.Writer_ID=$("#writerid").val();
         books.Writer_Name=$("#writerName").val();
         books.Writer_Last_Name=$("#writerLastName").val();
-        books.Publisher=$("#publisher").val();
+        books.name=$("#publisher").val();
         books.Year_of_publishing=$("#YearOfPublishing").val();
         books.Book_price=$("#price").val();
         books.In_inventory=$("#inventory").val();

@@ -9,14 +9,14 @@
  *  Returns all items from the table
  */
 Flight::route('GET /purchases',function(){
-    Flight::json(Flight::purchasesService()->getAll());
+    Flight::json(Flight::purchasesService()->getPurchaseAndBookAndUser());
 });
 
 /**
  *  Returns one from the table by ID
  */
 Flight::route('GET /purchases/@id',function($id){
-    Flight::json(Flight::purchasesService()->getByID($id));
+    Flight::json(Flight::purchasesService()->getPurchaseAndBookAndUserById($id));
 });
 
 /**

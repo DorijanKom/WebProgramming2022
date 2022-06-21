@@ -39,13 +39,17 @@
                 $publisher = $this->publisherDAO->add(['name' => $bookDescriptor['name']]);
               }
 
-              $this->dao->add(['Book_Name' => $bookDescriptor['Book_Name'],
+
+              $test=$this->dao->add(['Book_Name' => $bookDescriptor['Book_Name'],
                               'Publisher' => $publisher['id'],
                               'Year_of_publishing' => $bookDescriptor['Year_of_publishing'],
                               'Book_price' => $bookDescriptor['Book_price'],
                               'In_inventory' => $bookDescriptor['In_inventory']]);
               
 
+
+              print_r($test);
+              die;
               $book = $this->dao->get_book_by_name($bookDescriptor['Book_Name']); 
               $baw = $this->booksAndWritersDAO->add(['bookid'=>$book['id'],'writerid'=>$writer['id']]);
 

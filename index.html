@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Librarian.com</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/card.css">
+    <link rel="stylesheet" href="css/toastr.css">
     <style>
       .error{
         color: red;
@@ -24,13 +26,13 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">List Books</a>
+                <a class="nav-link active" aria-current="page" href="#view_books">List Books</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#">Orders</a>
+                <button class="btn btn-warning" type="button" onclick="purchasesService.list()">Orders</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#" tabindex="-1">Purchases</a>
+                <a class="nav-link active" href="#view_orders" tabindex="-1">Purchases</a>
               </li>
             </ul>
             <form class="d-flex">
@@ -44,31 +46,17 @@
 
     <main>
     </div>
-        <div class="container marketing" style="margin-top: 100px;">
-          <div class="book-change" class="row">
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElementWriter" style="margin-bottom: 10px"> Add Writer </button>
-          </div>
-            <div id="book-list" class="row">
-                <div class="d-flex justify-content-center">
-                    <div class="spinner-border" role="status">
-                      <span class="sr-only"></span>
-                    </div>
-                </div>
-            </div>
+        <div class="container marketing" id="container-marketing" style="margin-top: 100px;">
+          
+          <div id="view_books" class="row gx-4 gx-lg-5 align-items-center"></div>
+
+          <div id="view_purchases"></div>
+
+          <div id="view_orders"></div>
+
           </div>
     </main>
 </body>
-
-
-<script src="js/bootstrap.bundle.min.js"></script>
-<script src="js/jquery-3.6.0.min.js"></script>
-<script src="js/jquery.validate.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-
-<script src="js/booksService.js"></script>
-<script src="js/usersService.js"></script>
-<script src="js/WritersService.js"></script>
 
 
 <!--Modals-->
@@ -198,12 +186,27 @@
       </div>
     </div>
 
+    <!--All of the required project libraries-->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/jQuerySPApp.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    
+    <!--All of the required services-->
+    <script src="js/booksService.js"></script>
+    <script src="js/usersService.js"></script>
+    <script src="js/WritersService.js"></script>
+    <script src="js/purchasesService.js"></script>
+
+<!--Script for initializing services-->
 <script>
 
   var token = localStorage.getItem("token");
   if (token){
     BookService.init();
     WritersService.init();
+    purchasesService.init();
   }
   else{
     window.location.replace("login.html");

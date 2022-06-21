@@ -9,6 +9,14 @@
         {
             parent::__construct(new PurchaseDAO());
         }
+
+        public function getPurchaseAndBookAndUser(){
+            return $this->dao->getPurchaseAndBookAndUser();
+        }
+
+        public function getPurchaseAndBookAndUserById($id){
+            return $this->dao->getPurchaseAndBookAndUserById($id);
+        }
     }
 
 ?>

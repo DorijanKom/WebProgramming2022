@@ -14,7 +14,7 @@ abstract class BaseService{
     }
 
     public function add($params){
-        return $this->dao->add($params );
+        return $this->dao->add($params);
     }
 
     public function update($params, $id){
