@@ -24,13 +24,13 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" aria-current="page" href="#">List Books</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+                <a class="nav-link active" href="#">Orders</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <a class="nav-link active" href="#" tabindex="-1">Purchases</a>
               </li>
             </ul>
             <form class="d-flex">
@@ -67,7 +67,7 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 <script src="js/booksService.js"></script>
-<!--script src="js/usersService.js"></script-->
+<script src="js/usersService.js"></script>
 <script src="js/WritersService.js"></script>
 
 
@@ -84,7 +84,7 @@
           </div>
           <div class="modal-body">
             <input id="id" type="hidden">
-            <div class="form-group">
+            <div class="form-grid">
               <label>Book Name</label>
               <input name="bookName" id="bookName" type="text" class="form-control required">
             </div>
@@ -132,7 +132,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <div class="form-group">
+            <div class="form-grid">
               <label for="bookName" class="form-label">Book Name</label>
               <input name="Book_Name" type="text" id="bookName" class="form-control required" placeholder="Enter book name">
             </div>
