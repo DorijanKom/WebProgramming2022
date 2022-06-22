@@ -1,6 +1,5 @@
 var purchasesService = {
     init: function(){
-        purchasesService.list();
     },
 
     list: function(){

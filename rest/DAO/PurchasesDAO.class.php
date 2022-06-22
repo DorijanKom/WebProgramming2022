@@ -14,8 +14,8 @@
             $stmt.="FROM Purchase p ";
             $stmt.="JOIN Books b ON b.id = p.BookID ";
             $stmt.="JOIN Users u ON p.Sold_By = u.id";
-            $stmt.="WHERE p.id = :id";
-            $result=$this->conn->prepare($stmt);
+            $stmt.="WHERE p.id = :id ";
+            $result = $this->conn->prepare($stmt);
             $result->execute(['id'=>$id]);
             return @reset($result->fetchAll(PDO::FETCH_ASSOC));
         }

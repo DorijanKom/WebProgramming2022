@@ -26,13 +26,13 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#view_books">List Books</a>
+                <a class="nav-link active" aria-current="page" href="#view_books" onclick="BookService.list()">List Books</a>
               </li>
               <li class="nav-item">
-                <button class="btn btn-warning" type="button" onclick="purchasesService.list()">Orders</a>
+                <a class="nav-link active" aria-current="page" href="#view_purchases" onclick="purchasesService.list()">Purchases</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#view_orders" tabindex="-1">Purchases</a>
+                <a class="nav-link active" href="#view_orders" tabindex="-1">Orders</a>
               </li>
             </ul>
             <form class="d-flex">
@@ -206,7 +206,6 @@
   if (token){
     BookService.init();
     WritersService.init();
-    purchasesService.init();
   }
   else{
     window.location.replace("login.html");
