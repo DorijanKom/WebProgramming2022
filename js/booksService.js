@@ -168,5 +168,46 @@ var BookService = {
             //usersService.logout();
           }*/
         })
+    },
+
+    search: function(){
+        var name = document.getElementById("search-material").value;
+        console.log(name);
+        $.ajax({
+          url: "rest/books/search/"+name,
+          type: "GET",
+          beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+          },
+          success: function(data){
+            SPApp.handleSectionVisibility("#view_search_books");
+            var html=``;
+            for(let i=0;i<data.length;i++){
+      
+                html+=`
+                <div class="col-lg-3 container overflow-hidden" id="view_books">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbanner2.kisspng.com%2F20180422%2Fvzq%2Fkisspng-drawing-book-sketch-5adcf25816d295.9076212715244294000935.jpg&f=1&nofb=1" alt="Card image cap">
+                    <div class="card-body">
+                        <h4 class="card-title">`+data[i].Writer_Name +` ` +data[i].Writer_Last_Name+`</h4>
+                        <h5 class="card-title" id="displayBookName">`+data[i].Book_Name+`</h5>
+                        <p class="card-text">`+data[i].name +`
+                        <br>`+data[i].Book_price+`KM</p>
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-primary books-button" onclick="BookService.get(`+data[i].id+`)">View Info</button>
+                            <button type="button" class="btn btn-danger books-button" onclick="BookService.delete(`+data[i].id+`)">Delete</button>
+                        </div>
+                    </div>
+                    </div>
+                    </div>`;
+            }
+            name="";
+            $("#view_search_books").html(html);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            toastr.error(XMLHttpRequest.responseJSON.message);
+            //usersService.logout();
+          }
+      });
     }
 }

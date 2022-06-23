@@ -25,6 +25,10 @@ Flight::route('GET /books/@id',function($id){
     Flight::json(Flight::booksService()->getByIDWithWriterNames($id));
 });
 
+
+Flight::route('GET /books/search/@name', function($name){
+    Flight::json(Flight::booksService()->searchBook($name));
+});
 /**
  *  Adds new data to the table
  */

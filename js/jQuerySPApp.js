@@ -4,7 +4,7 @@ var SPApp = {
        * All the elements which do not have to be in spotlight are hidden,
        * only the active section is visible
        */
-      elements = ["#view_books", "#view_orders", "#view_purchases"];
+      elements = ["#view_books", "#view_orders", "#view_purchases","#view_search_books"];
       $(elements.join(", ")).attr('hidden', true);
       
       $(spotlight_element).attr('hidden',false);

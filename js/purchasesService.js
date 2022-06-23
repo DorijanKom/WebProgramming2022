@@ -18,8 +18,7 @@ var purchasesService = {
                     <th scope="col">Book</th>
                     <th scope="col">Time of purchase</th>
                     <th scope="col">Date of purchase</th>
-                    <th scope="col">User name</th>
-                    <th scope="col">User last name</th>
+                    <th scope="col">Sold by</th>
                   </tr>
                 </thead>
                 <tbody>`;
@@ -30,8 +29,7 @@ var purchasesService = {
                     <td>`+data[i].Book_Name+`</td>
                     <td>`+data[i].Time_of_Purchase+`</td>
                     <td>`+data[i].Date_of_Purchase+`</td>
-                    <td>`+data[i].User_Name+`</td>
-                    <td>`+data[i].User_Last_Name+`</td>
+                    <td>`+data[i].User_Name+` `+data[i].User_Last_Name+`</td>
                   </tr>`
                 }
                 html+=`</tbody>
