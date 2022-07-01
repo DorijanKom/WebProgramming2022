@@ -24,8 +24,7 @@ var purchasesService = {
                 <tbody>`;
                 for(let i=0;i<data.length;i++){
                     html+=`<tr>
-                    <th scope="row">`+i+`</th>
-                    <td>`+data[i].id+`</td>
+                    <th scope="row">`+data[i].id+`</th>
                     <td>`+data[i].Book_Name+`</td>
                     <td>`+data[i].Time_of_Purchase+`</td>
                     <td>`+data[i].Date_of_Purchase+`</td>

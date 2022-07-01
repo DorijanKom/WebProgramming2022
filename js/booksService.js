@@ -201,7 +201,6 @@ var BookService = {
                     </div>
                     </div>`;
             }
-            name="";
             $("#view_search_books").html(html);
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
