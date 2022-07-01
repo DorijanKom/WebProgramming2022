@@ -27,7 +27,7 @@
             $stmt.="JOIN Users u ON p.Sold_By = u.id";
             $result=$this->conn->prepare($stmt);
             $result->execute();
-            return @reset($result->fetchAll(PDO::FETCH_ASSOC));
+            return $result->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 ?>

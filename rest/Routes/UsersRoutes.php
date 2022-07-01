@@ -57,7 +57,7 @@
      *     @OA\RequestBody(description="Basic user info", required=true,
      *       @OA\MediaType(mediaType="application/json",
      *    			@OA\Schema(
-     *    				@OA\Property(property="email", type="string", example="dorijan.komsic@stu.ibu.edu.ba",	description="Email"),
+     *    				@OA\Property(property="username", type="string", example="dorijan",	description="Username"),
      *    				@OA\Property(property="password", type="string", example="12345",	description="Password" )
      *          )
      *     )),
