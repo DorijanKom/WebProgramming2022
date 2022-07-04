@@ -35,7 +35,7 @@
                 <a class="nav-link active" aria-current="page" href="#view_purchases" onclick="purchasesService.list()">Purchases</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="#view_orders" tabindex="-1">Orders</a>
+                <a class="nav-link active" aria-current="page" href="#view_orders" onclick="OrdersService.list()"">Orders</a>
               </li>
             </ul>
             <form method="post">
@@ -243,6 +243,7 @@
     <script src="js/usersService.js"></script>
     <script src="js/WritersService.js"></script>
     <script src="js/purchasesService.js"></script>
+    <script src="js/ordersService.js"></script>
 
 <!--Script for initializing services-->
 <script>

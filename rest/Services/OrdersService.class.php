@@ -9,6 +9,10 @@
         {
             parent::__construct(new OrdersDAO());
         }
+
+        public function getOrdersAndUsers(){
+            return $this->dao->getOrdersAndUsers();
+        }
     }
 
 ?>

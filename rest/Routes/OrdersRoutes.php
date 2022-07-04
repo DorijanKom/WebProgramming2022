@@ -9,7 +9,7 @@
  *  Returns all items from the table
  */
 Flight::route('GET /orders',function(){
-    Flight::json(Flight::ordersService()->getAll());
+    Flight::json(Flight::ordersService()->getOrdersAndUsers());
 });
 
 /**
