@@ -56,8 +56,6 @@
               
 
 
-              print_r($test);
-              die;
               $book = $this->dao->get_book_by_name($bookDescriptor['Book_Name']); 
               $baw = $this->booksAndWritersDAO->add(['bookid'=>$book['id'],'writerid'=>$writer['id']]);
 

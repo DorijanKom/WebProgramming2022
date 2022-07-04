@@ -91,7 +91,7 @@
                 return $result->fetchAll(PDO::FETCH_ASSOC);
             }
             else{
-                $stm.=" WHERE LOWER(w.Writer_Name) LIKE '%".$name."%' AND LOWER(w.Writer_Last_Name) LIKE '%".$last_name."%'";
+                $stm.=" WHERE LOWER(w.Writer_Name) LIKE '%".$name."%' OR LOWER(w.Writer_Last_Name) LIKE '%".$last_name."%'";
                 $result=$this->conn->prepare($stm);
                 $result->execute();
                 return $result->fetchAll(PDO::FETCH_ASSOC);}
