@@ -35,7 +35,7 @@
                 <a class="nav-link active" aria-current="page" href="#view_purchases" onclick="purchasesService.list()">Purchases</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#view_orders" onclick="OrdersService.list()"">Orders</a>
+                <a class="nav-link active" aria-current="page" href="#view_orders" onclick="OrdersService.list()">Orders</a>
               </li>
             </ul>
             <form method="post">
@@ -212,11 +212,11 @@
           </div>
           <div class="modal-body">
               <div class="form-group">
-                <label for="writerName" class="form-label">Writer Name</label>
+                <label for="searchWriterName" class="form-label">Writer Name</label>
                 <input name="Writer_Name" type="text" id="searchWriterName" class="form-control required" placeholder="Enter writer name">
               </div>
               <div class="form-group">
-                <label for="writerLastName" class="form-label">Writer Last Name</label>
+                <label for="searchWriterLastName" class="form-label">Writer Last Name</label>
                 <input name="Writer_Last_Name" type="text" id="searchWriterLastName" class="form-control required" placeholder="Enter writer last name">
               </div>
           </div>
@@ -228,6 +228,50 @@
         </div>
       </div>
     </div>
+
+        <!--Modal-Add-Orders-->
+        <div class="modal fade" id="addOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <form id="addOrderForm">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <div class="form-group">
+                    <label for="orderAmount" class="form-label">Order Amount</label>
+                    <input name="Order_Amount" type="int" id="orderAmount" class="form-control required" placeholder="Enter order amount">
+                  </div>
+                  <div class="form-group">
+                    <label for="bookName" class="form-label">Book Name</label>
+                    <input name="Book_Name" type="text" id="bookName" class="form-control required" placeholder="Enter the book name">
+                  </div>
+                  <div class="form-group">
+                    <label for="dateOfOrder" class="form-label">Date of order</label>
+                    <input name="Date_of_Order" type="date" id="dateOfOrder" class="form-control required" placeholder="Enter the date of order">
+                  </div>
+                  <div class="form-group">
+                    <label for="dateOfDelivery" class="form-label">Date of delivery</label>
+                    <input name="Date_of_Delivery" type="date" id="dateOfDelivery" class="form-control" placeholder="Enter the date of delivery">
+                  </div>
+                  <div class="form-group">
+                    <label for="bookName" class="form-label">User Name</label>
+                    <input name="User_Name" type="text" id="userName" class="form-control required" placeholder="Enter the User's name">
+                  </div>
+                  <div class="form-group">
+                    <label for="userLastName" class="form-label">User Last Name</label>
+                    <input name="User_Last_Name" type="text" id="userLastName" class="form-control required" placeholder="Enter the User's last name">
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-warning">Submit</button>
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
 
     <!--All of the required project libraries-->
     <script src="js/bootstrap.bundle.min.js"></script>

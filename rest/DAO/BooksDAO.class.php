@@ -37,7 +37,7 @@
         }
 
         public function get_book_by_name($bookName){
-            $stm="SELECT b.id, b.Book_Name, b.Year_of_publishing, b.Book_price ";
+            $stm="SELECT b.id, b.Book_Name, b.Year_of_publishing, b.Book_price, b.In_inventory ";
             $stm.="FROM Books b ";
             $stm.="WHERE Book_Name = :book_name";
             $result=$this->conn->prepare($stm);

@@ -12,7 +12,10 @@ var OrdersService = {
             },
             success: function(data){
                 SPApp.handleSectionVisibility("#view_orders");
-                var html=`<table class="table table-striped table-dark">
+                var html=`<div class="book-change" class="row">
+                <button class="btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#addOrder" style="margin-bottom: 10px"> Add Order </button>
+                </div>
+                <table class="table table-striped table-dark">
                 <thead>
                   <tr>
                     <th scope="col">id</th>
@@ -41,5 +44,30 @@ var OrdersService = {
               $("#view_orders").html(html);
             },
         })
+    },
+
+    add: function(orders){
+      console.log(orders);
+      $.ajax({
+        url: "rest/orders",
+        type: "POST",
+        data: JSON.stringify(orders),
+        contentType: 'application/json',
+        beforeSend: function(xhr){
+          xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+        },
+        success: function(result){
+          $('#orders_list').html(`<div id="orders_list" class="row">
+          <div class="d-flex justify-content-center">
+              <div class="spinner-border" role="status">
+                <span class="sr-only"></span>
+              </div>
+          </div>
+         </div>`);
+          $("#addOrder").modal("hide");
+          OrdersService.list();
+          console.log(result);
+        }
+      })
     }
 }

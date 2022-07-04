@@ -24,7 +24,7 @@ Flight::route('GET /orders/@id',function($id){
  */
 Flight::route('POST /orders', function(){
     $request=Flight::request();
-    Flight::ordersService()->add($request->data->getData());
+    Flight::ordersService()->addOrderWithUser($request->data->getData());
     Flight::json(['message' => 'updated']);
 });
 
