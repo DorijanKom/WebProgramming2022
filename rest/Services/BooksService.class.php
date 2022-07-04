@@ -80,7 +80,7 @@
                 $publisher = $this->publisherDAO->add(['name' => $bookDescriptor['name']]);
               }
               
-              $test=$this->dao->update(['Book_Name' => $bookDescriptor['Book_Name'],
+              $this->dao->update(['Book_Name' => $bookDescriptor['Book_Name'],
                                         'Publisher' => $publisher['id'],
                                         'Year_of_publishing' => $bookDescriptor['Year_of_publishing'],
                                         'Book_price' => $bookDescriptor['Book_price'],

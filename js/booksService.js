@@ -19,8 +19,8 @@ var BookService = {
             success: function(data){
               SPApp.handleSectionVisibility("#view_books");
               var html=`<div class="book-change" class="row">
-              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
-              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElementWriter" style="margin-bottom: 10px"> Add Writer </button>
+              <button class="btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
+              <button class="btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElementWriter" style="margin-bottom: 10px"> Add Writer </button>
               <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#searchWriter" style="margin-bottom: 10px"> <i class="bi bi-search"> Search Writer</i></button>
             </div>`;
               for(let i=0;i<data.length;i++){
@@ -139,10 +139,10 @@ var BookService = {
         books.Writer_Name=$("#writerName").val();
         books.Writer_Last_Name=$("#writerLastName").val();
         books.name=$("#publisher").val();
-        books.Year_of_publishing=$("#YearOfPublishing").val();
+        books.Year_of_publishing=$("#yearOfPublishing").val();
         books.Book_price=$("#price").val();
         books.In_inventory=$("#inventory").val();
-    
+        console.log(books);
         $.ajax({
           url:'rest/books/'+$("#id").val(),
           type:'PUT',
@@ -183,8 +183,8 @@ var BookService = {
           success: function(data){
             SPApp.handleSectionVisibility("#view_search_books");
             var html=`<div class="book-change" class="row">
-              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
-              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElementWriter" style="margin-bottom: 10px"> Add Writer </button>
+              <button class="btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
+              <button class="btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElementWriter" style="margin-bottom: 10px"> Add Writer </button>
               <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#searchWriter" style="margin-bottom: 10px"> <i class="bi bi-search"> Search Writer</i></button>
             </div>`;
             for(let i=0;i<data.length;i++){
@@ -229,8 +229,8 @@ var BookService = {
           $("#searchWriter").modal("hide");
           SPApp.handleSectionVisibility("#view_search_by_writers");
           var html=`<div class="book-change" class="row">
-              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
-              <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addElementWriter" style="margin-bottom: 10px"> Add Writer </button>
+              <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
+              <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElementWriter" style="margin-bottom: 10px"> Add Writer </button>
               <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#searchWriter" style="margin-bottom: 10px"> <i class="bi bi-search"> Search Writer</i></button>
             </div>`;
           for(let i=0;i<data.length;i++){
