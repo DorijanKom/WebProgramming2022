@@ -1,6 +1,11 @@
 var OrdersService = {
     init: function(){
-
+      $("#addOrderForm").validate({
+        submitHandler: function(form){ 
+          var orders = Object.fromEntries((new FormData(form)).entries())
+          OrdersService.add(orders);
+        }
+      })
     },
 
     list: function(){
@@ -33,7 +38,7 @@ var OrdersService = {
                     <th scope="row">`+data[i].id+`</th>
                     <td>`+data[i].Book_Name+`</td>
                     <td>`+data[i].Order_Amount+`</td>
-                    <td>`+data[i].Order_price+`</td>
+                    <td>`+data[i].Order_price+` KM</td>
                     <td>`+data[i].Date_of_Order+`</td>
                     <td>`+data[i].Date_of_Delivery+`</td>
                     <td>`+data[i].User_Name+` `+data[i].User_Last_Name+`</td>
@@ -47,12 +52,12 @@ var OrdersService = {
     },
 
     add: function(orders){
-      console.log(orders);
       $.ajax({
         url: "rest/orders",
         type: "POST",
         data: JSON.stringify(orders),
         contentType: 'application/json',
+        dataType:'json',
         beforeSend: function(xhr){
           xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
         },

@@ -29,13 +29,16 @@
             }
             $calcAmount = $orderDescriptor['Order_Amount'] * $book['Book_price']; 
 
+            if($orderDescriptor['Date_of_Delivery']==''){
+                $orderDescriptor['Date_of_Delivery']=null;
+            }
+
             $order = $this->dao->add(['Order_Amount'=>$orderDescriptor['Order_Amount'],
                             'BookID'=>$book['id'],
                             'Order_price'=>$calcAmount,
                             'Date_of_Order'=>$orderDescriptor['Date_of_Order'],
                             'Date_of_Delivery'=>$orderDescriptor['Date_of_Delivery'],
                             'User_ID'=>$user['id']]);
-            
             
 
             $newInventory = $orderDescriptor['Order_Amount'] + $book['In_inventory'];
