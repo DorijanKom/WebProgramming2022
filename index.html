@@ -40,7 +40,7 @@
             </ul>
             <form method="post">
               <div style="float:left;">
-                <input type="search" id="search-material" class="form-control" placeholder="Search" aria-label="Search"/>
+                <input type="search" id="search-material" class="form-control" placeholder="Search books..." aria-label="Search"/>
               </div>
               <div style="float:left;">
                 <button id="search-button" type="submit" class="btn btn-warning" onclick="BookService.search();event.preventDefault();">
@@ -64,7 +64,9 @@
 
           <div id="view_orders"></div>
 
-          <div id="view_search_books"></div>
+          <div id="view_search_books" class="row gx-4 gx-lg-5 align-items-center"></div>
+
+          <div id="view_search_by_writers"></div>
 
           </div>
     </main>
@@ -192,6 +194,35 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Modal-Search-Writers-->
+    <div class="modal fade" id="searchWriter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="searchWritersForm">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Search Writer</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="writerName" class="form-label">Writer Name</label>
+                <input name="Writer_Name" type="text" id="searchWriterName" class="form-control required" placeholder="Enter writer name">
+              </div>
+              <div class="form-group">
+                <label for="writerLastName" class="form-label">Writer Last Name</label>
+                <input name="Writer_Last_Name" type="text" id="searchWriterLastName" class="form-control required" placeholder="Enter writer last name">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-warning" onclick="BookService.searchWriter();event.preventDefault();">Search</button>
           </div>
         </form>
         </div>

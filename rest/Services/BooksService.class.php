@@ -30,6 +30,10 @@
           return $this->dao->search_book($name);
         }
 
+        public function searchWriter($name,$lastName){
+          return $this->dao->search_writer($name,$lastName);
+        }
+
 
         public function addBookAndWriter($bookDescriptor){
               $writer = $this->writerDao->getWriterByNames($bookDescriptor['Writer_Last_Name'], $bookDescriptor['Writer_Name']);
