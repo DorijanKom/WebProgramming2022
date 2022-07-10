@@ -9,10 +9,8 @@
         }
 
         public function getOrdersAndUsers(){
-            $stm = "SELECT o.id, o.Order_Amount , b.Book_Name, o.Order_price, o.Date_of_Order, o.Date_of_Delivery, u.User_Name, u.User_Last_Name ";
-            $stm .= "FROM Orders o ";
-            $stm .= "JOIN Books b ON b.id = o.BookID ";
-            $stm .= "JOIN Users u ON o.User_ID  = u.id ";
+            $stm = "SELECT o.id, o.book_name, o.Order_Amount, o.Order_price, o.Date_of_Order, o.Date_of_Delivery 
+                    FROM Orders o ";       
             $stm .= "ORDER BY o.id ASC";
             $result = $this->conn->prepare($stm);
             $result->execute();
@@ -20,14 +18,11 @@
         }
 
         public function getOrdersAndUsersByID($id){
-            $stm = "SELECT o.id, o.Order_Amount , b.Book_Name, o.Order_price, o.Date_of_Order, o.Date_of_Delivery, u.User_Name, u.User_Last_Name ";
+            $stm = "SELECT o.id, o.book_name, o.Order_Amount, o.Order_price, o.Date_of_Order, o.Date_of_Delivery ";
             $stm .= "FROM Orders o ";
-            $stm .= "JOIN Books b ON b.id = o.BookID ";
-            $stm .= "JOIN Users u ON o.User_ID  = u.id ";
             $stm .= "WHERE o.id = :id";
-            $stm .= "ORDER BY o.id ASC";
             $result = $this->conn->prepare($stm);
-            $result->execute(["id"=>$id]);
+            $result->execute(['id'=>$id]);
             return @reset($result->fetchAll(PDO::FETCH_ASSOC));
         }
 }

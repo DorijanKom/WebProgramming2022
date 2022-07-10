@@ -16,7 +16,7 @@ Flight::route('GET /orders',function(){
  *  Returns one from the table by ID
  */
 Flight::route('GET /orders/@id',function($id){
-    Flight::json(Flight::ordersService()->getByID($id));
+    Flight::json(Flight::ordersService()->getOrderByID($id));
 });
 
 /**
@@ -30,7 +30,7 @@ Flight::route('POST /orders', function(){
 
 Flight::route('PUT /orders/@id',function($id){
     $request=Flight::request();
-    Flight::ordersService()->update($request->data->getData(),$id);
+    Flight::ordersService()->updateOrder($request->data->getData(),$id);
     Flight::json(['message' => 'updated']);
 });
 
