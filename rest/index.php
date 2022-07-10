@@ -28,6 +28,13 @@ Flight::map('error', function(Exception $e){
     Flight::json(['message'=> $e->getMessage()], 500);
 });
 
+Flight::map('query', function($name, $default_value = ""){
+  $request = Flight::request();
+  $query_param = @$request->query->getData()[$name];
+  $query_param = $query_param ? $query_param : $default_value;
+  return rawurldecode($query_param);
+});
+
 Flight::route('/*', function(){
 
     $path = Flight::request()->url;

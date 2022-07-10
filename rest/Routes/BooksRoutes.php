@@ -30,7 +30,9 @@ Flight::route('GET /books/search/@name', function($name){
     Flight::json(Flight::booksService()->searchBook($name));
 });
 
-Flight::route('GET /books/search/@name/@lastName', function($name,$lastName){
+Flight::route('GET /search_books/writer', function(){
+    $name = Flight::query('name');
+    $lastName = Flight::query('lastname');
     Flight::json(Flight::booksService()->searchWriter($name,$lastName));
 });
 /**

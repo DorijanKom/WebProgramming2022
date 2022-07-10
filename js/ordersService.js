@@ -8,6 +8,16 @@ var OrdersService = {
       })
     },
 
+    parseJWT: function(token){
+      var base64Url = token.split('.')[1];
+      var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+
+      return JSON.parse(jsonPayload);
+    },
+
     list: function(){
         $.ajax({
             url: "rest/orders",
@@ -30,6 +40,7 @@ var OrdersService = {
                     <th scope="col">Order price</th>
                     <th scope="col">Date of order</th>
                     <th scope="col">Date of delivery</th>
+                    <th scope="col">Ordered by</th>
                   </tr>
                 </thead>
                 <tbody>`;
@@ -48,6 +59,7 @@ var OrdersService = {
                     <td>`+data[i].Order_price+` KM</td>
                     <td>`+data[i].Date_of_Order+`</td>
                     <td>`+data[i].Date_of_Delivery+`</td>
+                    <td>`+data[i].User_Name+` `+data[i].User_Last_Name+`</td>
                   </tr>`
                 }
                 html+=`</tbody>
@@ -58,6 +70,9 @@ var OrdersService = {
     },
 
     add: function(orders){
+      orders.User_Name = OrdersService.parseJWT(localStorage.getItem('token')).User_Name;
+      orders.User_Last_Name = OrdersService.parseJWT(localStorage.getItem('token')).User_Last_Name;
+      console.log(orders);
       $.ajax({
         url: "rest/orders",
         type: "POST",

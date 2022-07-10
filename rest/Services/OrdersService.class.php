@@ -7,10 +7,14 @@
 
     class OrdersService extends BaseService {
 
+        private $bookDAO;
+        private $userDAO;
+
         public function __construct()
         {
             parent::__construct(new OrdersDAO());
             $this->bookDAO = new BooksDAO();
+            $this->userDAO = new UsersDAO();
         }
 
         public function getOrdersAndUsers(){
@@ -25,6 +29,7 @@
 
 
             $book = $this->bookDAO->get_book_by_name($orderDescriptor['book_name']);
+            $user = $this->userDAO->getUserByName($orderDescriptor['User_Name'],$orderDescriptor['User_Last_Name']);
 
             // Calculates the amount of books ordered times the book price
             $calcAmount = $orderDescriptor['Order_Amount'] * $book['Book_price']; 
@@ -40,7 +45,8 @@
                 'book_name'=>$orderDescriptor['book_name'],
                 'Order_price'=>$calcAmount,
                 'Date_of_Order'=>$orderDescriptor['Date_of_Order'],
-                'Date_of_Delivery'=>$orderDescriptor['Date_of_Delivery']]);
+                'Date_of_Delivery'=>$orderDescriptor['Date_of_Delivery'],
+                'ordered_by'=>$user['id']]);
             } else {
                 throw new \Exception("Please create book entry before adding order!");
             }
@@ -55,6 +61,7 @@
 
         public function updateOrder($orderDescriptor,$id){
             $book = $this->bookDAO->get_book_by_name($orderDescriptor['book_name']);
+            $user = $this->ụserDAO->getUserByName($orderDescriptor['User_Name'],$orderDescriptor['User_Last_Name']);
             $oldOrder = $this->dao->getOrdersAndUsersByID($id);
 
             $calcAmount = $orderDescriptor['Order_Amount'] * $book['Book_price'];
@@ -70,7 +77,8 @@
                 'book_name'=>$orderDescriptor['book_name'],
                 'Order_price'=>$calcAmount,
                 'Date_of_Order'=>$orderDescriptor['Date_of_Order'],
-                'Date_of_Delivery'=>$orderDescriptor['Date_of_Delivery']],$id);
+                'Date_of_Delivery'=>$orderDescriptor['Date_of_Delivery'],
+                'ordered_by'=>$user['id']],$id);
 
             
             $newInventory = $orderDescriptor['Order_Amount'] + ($book['In_inventory']-$oldOrder['Order_Amount']);

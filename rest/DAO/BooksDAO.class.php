@@ -14,7 +14,7 @@
             FROM Orders
             INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID; */
 
-            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, p.name, b.Year_of_publishing, b.Book_price, b.In_inventory ";
+            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, p.name, b.Year_of_publishing, b.Book_price, b.In_inventory, b.is_available ";
             $stm.="FROM Books b ";
             $stm.="LEFT OUTER JOIN BooksAndWriters baw ON b.id = baw.bookid ";
             $stm.="LEFT OUTER JOIN Writers w ON baw.writerid = w.id ";
@@ -46,7 +46,7 @@
         }
 
         public function get_by_id_with_writer_names($id){
-            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, p.name, b.Year_of_publishing, b.Book_price, b.In_inventory ";
+            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, p.name, b.Year_of_publishing, b.Book_price, b.In_inventory, b.is_available ";
             $stm.="FROM Books b ";
             $stm.="LEFT OUTER JOIN BooksAndWriters baw ON b.id = baw.bookid ";
             $stm.="LEFT OUTER JOIN Writers w ON baw.writerid = w.id ";
@@ -59,7 +59,7 @@
 
         public function search_book($name){
             $name=strtolower($name);
-            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, p.name, b.Year_of_publishing, b.Book_price, b.In_inventory ";
+            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, p.name, b.Year_of_publishing, b.Book_price, b.In_inventory, b.is_available ";
             $stm.="FROM Books b ";
             $stm.="LEFT OUTER JOIN BooksAndWriters baw ON b.id = baw.bookid ";
             $stm.="LEFT OUTER JOIN Writers w ON baw.writerid = w.id ";
@@ -71,30 +71,29 @@
         }
 
         public function search_writer($name,$last_name){
-            $name=strtolower($name);
-            $last_name=strtolower($last_name);
+            if($name!=null){
+                $name=strtolower($name);
+            }
+            if($last_name!=null){
+                $last_name=strtolower($last_name);
+            }
             $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, p.name, b.Year_of_publishing, b.Book_price, b.In_inventory ";
             $stm.="FROM Books b ";
             $stm.="LEFT OUTER JOIN BooksAndWriters baw ON b.id = baw.bookid ";
             $stm.="LEFT OUTER JOIN Writers w ON baw.writerid = w.id ";
             $stm.="JOIN Publishers p ON p.id = b.Publisher ";
-            if($name==null){
+            if($name==null && $last_name!=null){
                 $stm.=" WHERE LOWER(w.Writer_Last_Name) LIKE '%".$last_name."%'";
-                $result=$this->conn->prepare($stm);
-                $result->execute();
-                return $result->fetchAll(PDO::FETCH_ASSOC);
             }
-            else if($last_name==null){
+            else if($last_name==null && $name!=null){
                 $stm.=" WHERE LOWER(w.Writer_Name) LIKE '%".$name."%'";
-                $result=$this->conn->prepare($stm);
-                $result->execute();
-                return $result->fetchAll(PDO::FETCH_ASSOC);
             }
-            else{
+            else if($last_name!=null && $name!=null){
                 $stm.=" WHERE LOWER(w.Writer_Name) LIKE '%".$name."%' OR LOWER(w.Writer_Last_Name) LIKE '%".$last_name."%'";
-                $result=$this->conn->prepare($stm);
-                $result->execute();
-                return $result->fetchAll(PDO::FETCH_ASSOC);}
+            }
+            $result=$this->conn->prepare($stm);
+            $result->execute();
+            return $result->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 

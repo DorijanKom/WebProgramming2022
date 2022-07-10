@@ -54,8 +54,6 @@
                               'Book_price' => $bookDescriptor['Book_price'],
                               'In_inventory' => $bookDescriptor['In_inventory']]);
               
-
-
               $book = $this->dao->get_book_by_name($bookDescriptor['Book_Name']); 
               $baw = $this->booksAndWritersDAO->add(['bookid'=>$book['id'],'writerid'=>$writer['id']]);
 
@@ -86,6 +84,7 @@
                                         'Book_price' => $bookDescriptor['Book_price'],
                                         'In_inventory' => $bookDescriptor['In_inventory']], $id);
                                         
+              
               $book = $this->dao->get_book_by_name($bookDescriptor['Book_Name']);
 
               $baw = $this->booksAndWritersDAO->getBaW($book['id']);

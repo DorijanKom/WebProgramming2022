@@ -220,7 +220,7 @@ var BookService = {
       var writerLastName = document.getElementById("searchWriterLastName").value;
       console.log(writerName+" "+writerLastName);
       $.ajax({
-        url: "rest/books/search/"+writerName+"/"+writerLastName,
+        url: "rest/search_books/writer?name="+writerName+"&lastname="+writerLastName,
         type: "GET",
         beforeSend: function(xhr){
           xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
