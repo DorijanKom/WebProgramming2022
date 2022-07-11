@@ -41,13 +41,21 @@ Flight::route('GET /search_books/writer', function(){
 Flight::route('POST /books', function(){
     $data=Flight::request()->data->getData();
     $book = Flight::booksService()->addBookAndWriter($data);
-    Flight::json(['message' => 'updated']);
+    if($book==null){
+        Flight::json(["error"=>"Cannot add an existing book!"]);
+    } else {
+        Flight::json(['message' => 'updated']);
+    }
 });
 
 Flight::route('PUT /books/@id',function($id){
     $request=Flight::request();
-    Flight::booksService()->updateBookAndWriter($request->data->getData(),$id);
-    Flight::json(['message' => 'updated']);
+    $book = Flight::booksService()->updateBookAndWriter($request->data->getData(),$id);
+    if($book==null){
+        Flight::json(["error"=>"Cannot add an existing book!"]);
+    } else {
+        Flight::json(['message' => 'updated']);
+    }
 });
 
 Flight::route('DELETE /books/@id',function($id){

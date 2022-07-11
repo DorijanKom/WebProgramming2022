@@ -24,7 +24,6 @@ var BookService = {
               <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#searchWriter" style="margin-bottom: 10px"> <i class="bi bi-search"> Search Writer</i></button>
             </div>`;
               for(let i=0;i<data.length;i++){
-        
                   html+=`
                   <div class="col-lg-3 container overflow-hidden" id="view_books">
                   <div class="card" style="width: 18rem;">
@@ -90,17 +89,22 @@ var BookService = {
             beforeSend: function(xhr){
               xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
             },
-            success:function(result){
-              $('#book-list').html(`<div id="book-list" class="row">
+            success: function(result){
+              $("#addElement").modal("hide");
+              if(result.error!=null){
+                toastr.error(result.error);
+              }
+              if(result.message!=null){
+                toastr.success(result.message);
+                $('#book-list').html(`<div id="book-list" class="row">
                     <div class="d-flex justify-content-center">
                         <div class="spinner-border" role="status">
                           <span class="sr-only"></span>
                         </div>
                     </div>
                 </div>`);
-              $("#addElement").modal("hide");
-              BookService.list();
-              console.log(result);
+                BookService.list();
+              }
             }
           })
     },
@@ -153,16 +157,21 @@ var BookService = {
             xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
           },
           success: function(result){
-            $("#exampleModal").modal("hide");
+            if(result.error!=null){
+              toastr.error(result.error);
+            }if(result.message!=null){
+              $("#exampleModal").modal("hide");
+              $(".books-button").attr("disabled",false);
+              $('#book-list').html(`<div id="book-list" class="row">
+                    <div class="d-flex justify-content-center">
+                        <div class="spinner-border" role="status">
+                          <span class="sr-only"></span>
+                        </div>
+                    </div>
+                </div>`)
+                BookService.list();
+            }
             $(".books-button").attr("disabled",false);
-            $('#book-list').html(`<div id="book-list" class="row">
-                  <div class="d-flex justify-content-center">
-                      <div class="spinner-border" role="status">
-                        <span class="sr-only"></span>
-                      </div>
-                  </div>
-              </div>`)
-              BookService.list();
           },
           /*error: function(XMLHttpRequest, textStatus, errorThrown) {
             toastr.error(XMLHttpRequest.responseJSON.message);

@@ -95,6 +95,25 @@
             $result->execute();
             return $result->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        public function find_book($book){
+            $stm = "SELECT EXISTS(SELECT b.Book_Name, b.Year_of_publishing, b.Book_price, b.In_inventory  
+            FROM Books b
+            LEFT OUTER JOIN BooksAndWriters baw ON b.id = baw.bookid
+            LEFT OUTER JOIN Writers w ON baw.writerid = w.id 
+            JOIN Publishers p ON p.id = b.Publisher
+            WHERE b.Book_Name = '".$book['Book_Name']."' AND
+                        w.Writer_Name = '".$book['Writer_Name']."' AND
+                        w.Writer_Last_Name = '".$book['Writer_Last_Name']."' AND
+                        p.name = '".$book['name']."' AND
+                        b.Year_of_publishing = '".$book['Year_of_publishing']."' AND
+                        b.Book_price BETWEEN ".$book['Book_price']-0.01." AND ".$book['Book_price']." AND
+                        b.In_inventory = ".$book['In_inventory']."
+            ) as found";
+            $result = $this->conn->prepare($stm);
+            $result->execute();
+            return $result->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 
 ?>
