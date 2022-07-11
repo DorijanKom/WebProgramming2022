@@ -83,16 +83,22 @@ var OrdersService = {
           xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
         },
         success: function(result){
-          $('#orders_list').html(`<div id="orders_list" class="row">
-          <div class="d-flex justify-content-center">
-              <div class="spinner-border" role="status">
-                <span class="sr-only"></span>
-              </div>
-          </div>
-         </div>`);
-          $("#addOrder").modal("hide");
-          OrdersService.list();
-          console.log(result);
+          if(result.error!=null){
+            toastr.error(result.error);
+          }
+          if(result.message!=null){
+            toastr.success(result.message);
+            $('#orders_list').html(`<div id="orders_list" class="row">
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                  <span class="sr-only"></span>
+                </div>
+            </div>
+           </div>`);
+            $("#addOrder").modal("hide");
+            OrdersService.list();
+            console.log(result);
+          }
         }
       })
     },
@@ -106,6 +112,8 @@ var OrdersService = {
         orders.Order_Amount = $("#editOrderAmount").val();
         orders.Date_of_Order = $("#editDateOfOrder").val();
         orders.Date_of_Delivery = $("#editDateOfDelivery").val();
+        orders.User_Name = $("#userName").val();
+        orders.User_Last_Name = $("#userLastName").val();
         console.log(orders);
         $.ajax({
           url: 'rest/orders/'+$("#orderID").val(),
@@ -117,17 +125,24 @@ var OrdersService = {
             xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
           },
           success: function(result){
-            console.log(result);
-            $("#editOrder").modal("hide");
+            if(result.error!=null){
+              toastr.error(result.error);
+            }
+            if(result.message!=null){
+              toastr.success(result.message);
+              console.log(result);
+              $("#editOrder").modal("hide");
+              $(".orders-button").attr("disabled",false);
+              $('#orders_list').html(`<div id="orders_list" class="row">
+                <div class="d-flex justify-content-center">
+                    <div class="spinner-border" role="status">
+                      <span class="sr-only"></span>
+                    </div>
+                </div>
+              </div>`);
+              OrdersService.list();
+            }
             $(".orders-button").attr("disabled",false);
-            $('#orders_list').html(`<div id="orders_list" class="row">
-              <div class="d-flex justify-content-center">
-                  <div class="spinner-border" role="status">
-                    <span class="sr-only"></span>
-                  </div>
-              </div>
-            </div>`);
-            OrdersService.list();
           }
         })
     },
@@ -169,6 +184,8 @@ var OrdersService = {
             $("#editOrderPrice").val(data.Order_price);
             $("#editDateOfOrder").val(data.Date_of_Order);
             $("#editDateOfDelivery").val(data.Date_of_Delivery);
+            $("#userName").val(data.User_Name);
+            $("#userLastName").val(data.User_Last_Name);
             $("#editOrder").modal("show");
             $(".orders-button").attr("disabled",false);
         }

@@ -24,14 +24,22 @@ Flight::route('GET /orders/@id',function($id){
  */
 Flight::route('POST /orders', function(){
     $request=Flight::request();
-    Flight::ordersService()->addOrderWithUser($request->data->getData());
-    Flight::json(['message' => 'updated']);
+    $order=Flight::ordersService()->addOrderWithUser($request->data->getData());
+    if($order==null){
+        Flight::json(['error' => 'Please add book entry before creating order!']);
+    } else {
+        Flight::json(['message' => 'updated']);
+    }
 });
 
 Flight::route('PUT /orders/@id',function($id){
     $request=Flight::request();
-    Flight::ordersService()->updateOrder($request->data->getData(),$id);
-    Flight::json(['message' => 'updated']);
+    $order = Flight::ordersService()->updateOrder($request->data->getData(),$id);
+    if($order==null){
+        Flight::json(['error' => 'Please add book entry before creating order!']);
+    } else {
+        Flight::json(['message' => 'updated']);
+    }
 });
 
 Flight::route('DELETE /orders/@id',function($id){

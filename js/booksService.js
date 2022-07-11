@@ -160,6 +160,7 @@ var BookService = {
             if(result.error!=null){
               toastr.error(result.error);
             }if(result.message!=null){
+              toastr.success(result.message);
               $("#exampleModal").modal("hide");
               $(".books-button").attr("disabled",false);
               $('#book-list').html(`<div id="book-list" class="row">
