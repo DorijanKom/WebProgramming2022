@@ -40,6 +40,6 @@ var purchasesService = {
                 //usersService.logout();
               }
         })
-    },
+    }
 
 }

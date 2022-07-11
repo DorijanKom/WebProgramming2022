@@ -24,8 +24,12 @@ Flight::route('GET /purchases/@id',function($id){
  */
 Flight::route('POST /purchases', function(){
     $request=Flight::request();
-    Flight::purchasesService()->add($request->data->getData());
-    Flight::json(['message' => 'updated']);
+    $purchase = Flight::purchasesService()->addPurchase($request->data->getData());
+    if($purchase == null){
+        Flight::json(['error' => 'The inventory of chosen book is empty!']);
+    } else {
+        Flight::json(['message' => 'Sold!']);
+    }
 });
 
 Flight::route('PUT /purchases/@id',function($id){
