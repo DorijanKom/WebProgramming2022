@@ -27,15 +27,15 @@ var BookService = {
                   html+=`
                   <div class="col-lg-3 container overflow-hidden" id="view_books">
                   <div class="card" style="width: 18rem;">
-                      <img class="card-img-top" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbanner2.kisspng.com%2F20180422%2Fvzq%2Fkisspng-drawing-book-sketch-5adcf25816d295.9076212715244294000935.jpg&f=1&nofb=1" alt="Card image cap">
+                      <img class="card-img-top" src="https://www.pngall.com/wp-content/uploads/2018/05/Books-PNG-File.png" alt="Card image cap">
                       <div class="card-body">
                           <h4 class="card-title">`+data[i].Writer_Name +` ` +data[i].Writer_Last_Name+`</h4>
                           <h5 class="card-title" id="displayBookName">`+data[i].Book_Name+`</h5>
                           <p class="card-text">`+data[i].name +`
                           <br>`+data[i].Book_price+`KM</p>
                           <div class="btn-group" role="group">
-                              <button type="button" class="btn btn-primary books-button" onclick="BookService.get(`+data[i].id+`)">View Info</button>
-                              <button type="button" class="btn btn-danger books-button" onclick="BookService.delete(`+data[i].id+`)">Delete</button>
+                              <button type="button" class="btn btn-secondary books-button" onclick="BookService.get(`+data[i].id+`)">View Info</button>
+                              <button type="button" class="btn btn-warning books-button" onclick="purchasesService.sell(`+data[i].id+`)">Sell</button>
                           </div>
                       </div>
                       </div>
@@ -133,7 +133,7 @@ var BookService = {
       }
     })
     },
-    
+
 
     update: function(id){
         $(".books-button").attr("disabled",true);
@@ -203,15 +203,15 @@ var BookService = {
                 html+=`
                 <div class="col-lg-3 container overflow-hidden" id="view_books">
                 <div class="card" style="width: 18rem;">
-                    <img class="card-img-top" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbanner2.kisspng.com%2F20180422%2Fvzq%2Fkisspng-drawing-book-sketch-5adcf25816d295.9076212715244294000935.jpg&f=1&nofb=1" alt="Card image cap">
+                    <img class="card-img-top" src="https://www.pngall.com/wp-content/uploads/2018/05/Books-PNG-File.png" alt="Card image cap">
                     <div class="card-body">
                         <h4 class="card-title">`+data[i].Writer_Name +` ` +data[i].Writer_Last_Name+`</h4>
                         <h5 class="card-title" id="displayBookName">`+data[i].Book_Name+`</h5>
                         <p class="card-text">`+data[i].name +`
                         <br>`+data[i].Book_price+`KM</p>
                         <div class="btn-group" role="group">
-                            <button type="button" class="btn btn-primary books-button" onclick="BookService.get(`+data[i].id+`)">View Info</button>
-                            <button type="button" class="btn btn-danger books-button" onclick="BookService.delete(`+data[i].id+`)">Delete</button>
+                            <button type="button" class="btn btn-secondary books-button" onclick="BookService.get(`+data[i].id+`)">View Info</button>
+                            <button type="button" class="btn btn-warning books-button" onclick="PurchaseService.sell(`+data[i].id+`)">Sell</button>
                         </div>
                     </div>
                     </div>
@@ -249,15 +249,15 @@ var BookService = {
             html+=`
             <div class="col-lg-3 container overflow-hidden" id="view_books">
             <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbanner2.kisspng.com%2F20180422%2Fvzq%2Fkisspng-drawing-book-sketch-5adcf25816d295.9076212715244294000935.jpg&f=1&nofb=1" alt="Card image cap">
+                <img class="card-img-top" src="https://www.pngall.com/wp-content/uploads/2018/05/Books-PNG-File.png" alt="Card image cap">
                 <div class="card-body">
                     <h4 class="card-title">`+data[i].Writer_Name +` ` +data[i].Writer_Last_Name+`</h4>
                     <h5 class="card-title" id="displayBookName">`+data[i].Book_Name+`</h5>
                     <p class="card-text">`+data[i].name +`
                     <br>`+data[i].Book_price+`KM</p>
                     <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-primary books-button" onclick="BookService.get(`+data[i].id+`)">View Info</button>
-                        <button type="button" class="btn btn-danger books-button" onclick="BookService.delete(`+data[i].id+`)">Delete</button>
+                        <button type="button" class="btn btn-secondary books-button" onclick="BookService.get(`+data[i].id+`)">View Info</button>
+                        <button type="button" class="btn btn-warning books-button" onclick="PurchaseService.sell(`+data[i].id+`)">Sell</button>
                     </div>
                 </div>
                 </div>
