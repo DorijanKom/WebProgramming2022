@@ -48,7 +48,7 @@ var purchasesService = {
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 toastr.error(XMLHttpRequest.responseJSON.message);
-                //usersService.logout();
+                usersService.logout();
               }
         })
     },
@@ -86,6 +86,10 @@ var purchasesService = {
                 </div>`);
                 BookService.list();
               }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              toastr.error(XMLHttpRequest.responseJSON.message);
+              usersService.logout();
             }
           })
         });

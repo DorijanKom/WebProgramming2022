@@ -66,6 +66,10 @@ var OrdersService = {
                         </table>`;
               $("#view_orders").html(html);
             },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              toastr.error(XMLHttpRequest.responseJSON.message);
+              usersService.logout();
+            }
         })
     },
 
@@ -99,6 +103,10 @@ var OrdersService = {
             OrdersService.list();
             console.log(result);
           }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr.error(XMLHttpRequest.responseJSON.message);
+          usersService.logout();
         }
       })
     },
@@ -143,6 +151,10 @@ var OrdersService = {
               OrdersService.list();
             }
             $(".orders-button").attr("disabled",false);
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            toastr.error(XMLHttpRequest.responseJSON.message);
+            usersService.logout();
           }
         })
     },
@@ -164,6 +176,10 @@ var OrdersService = {
             </div>
           </div>`);
           OrdersService.list();
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr.error(XMLHttpRequest.responseJSON.message);
+          usersService.logout();
         }
       })
     },
@@ -188,6 +204,10 @@ var OrdersService = {
             $("#userLastName").val(data.User_Last_Name);
             $("#editOrder").modal("show");
             $(".orders-button").attr("disabled",false);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          toastr.error(XMLHttpRequest.responseJSON.message);
+          usersService.logout();
         }
       })
     }

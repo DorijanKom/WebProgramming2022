@@ -45,7 +45,7 @@ var BookService = {
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
               toastr.error(XMLHttpRequest.responseJSON.message);
-              //usersService.logout();
+              usersService.logout();
             }
         });
     },
@@ -74,7 +74,7 @@ var BookService = {
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
             toastr.error(XMLHttpRequest.responseJSON.message);
-            //usersService.logout();
+            usersService.logout();
           }
         })
     },
@@ -105,6 +105,10 @@ var BookService = {
                 </div>`);
                 BookService.list();
               }
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) {
+              toastr.error(XMLHttpRequest.responseJSON.message);
+              usersService.logout();
             }
           })
     },
@@ -129,7 +133,7 @@ var BookService = {
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
         toastr.error(XMLHttpRequest.responseJSON.message);
-        //usersService.logout();
+        usersService.logout();
       }
     })
     },
@@ -175,10 +179,10 @@ var BookService = {
             }
             $(".books-button").attr("disabled",false);
           },
-          /*error: function(XMLHttpRequest, textStatus, errorThrown) {
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
             toastr.error(XMLHttpRequest.responseJSON.message);
             //usersService.logout();
-          }*/
+          }
         })
     },
 
@@ -221,7 +225,7 @@ var BookService = {
           },
           error: function(XMLHttpRequest, textStatus, errorThrown) {
             toastr.error(XMLHttpRequest.responseJSON.message);
-            //usersService.logout();
+            usersService.logout();
           }
       });
     },
@@ -267,7 +271,7 @@ var BookService = {
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
           toastr.error(XMLHttpRequest.responseJSON.message);
-          //usersService.logout();
+          usersService.logout();
         }
       })
     }
