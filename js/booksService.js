@@ -20,7 +20,6 @@ var BookService = {
               SPApp.handleSectionVisibility("#view_books");
               var html=`<div class="book-change" class="row">
               <button class="btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
-              <button class="btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElementWriter" style="margin-bottom: 10px"> Add Writer </button>
               <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#searchWriter" style="margin-bottom: 10px"> <i class="bi bi-search"> Search Writer</i></button>
             </div>`;
               for(let i=0;i<data.length;i++){
@@ -199,7 +198,6 @@ var BookService = {
             SPApp.handleSectionVisibility("#view_search_books");
             var html=`<div class="book-change" class="row">
               <button class="btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
-              <button class="btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElementWriter" style="margin-bottom: 10px"> Add Writer </button>
               <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#searchWriter" style="margin-bottom: 10px"> <i class="bi bi-search"> Search Writer</i></button>
             </div>`;
             for(let i=0;i<data.length;i++){
@@ -245,7 +243,6 @@ var BookService = {
           SPApp.handleSectionVisibility("#view_search_by_writers");
           var html=`<div class="book-change" class="row">
               <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
-              <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElementWriter" style="margin-bottom: 10px"> Add Writer </button>
               <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#searchWriter" style="margin-bottom: 10px"> <i class="bi bi-search"> Search Writer</i></button>
             </div>`;
           for(let i=0;i<data.length;i++){

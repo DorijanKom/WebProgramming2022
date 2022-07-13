@@ -1,13 +1,11 @@
 <?php
 
 /**
- * The following are methods for basic CRUD operations implemented in flight
+ * This route is used for a many-many table, so I probably don't need api docs here
  */
 
 
-/**
- *  Returns all items from the table
- */
+
 Flight::route('GET /baw',function(){
     Flight::json(Flight::booksAndWritersService()->getAll());
 });

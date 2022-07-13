@@ -27,6 +27,7 @@ var purchasesService = {
                   <tr>
                     <th scope="col">id</th>
                     <th scope="col">Book</th>
+                    <th scope="col">Purchase amount</th>
                     <th scope="col">Time of purchase</th>
                     <th scope="col">Date of purchase</th>
                     <th scope="col">Sold by</th>
@@ -37,6 +38,7 @@ var purchasesService = {
                     html+=`<tr>
                     <th scope="row">`+data[i].id+`</th>
                     <td>`+data[i].Book_Name+`</td>
+                    <td>`+data[i].Book_price+`KM</td>
                     <td>`+data[i].Time_of_Purchase+`</td>
                     <td>`+data[i].Date_of_Purchase+`</td>
                     <td>`+data[i].User_Name+` `+data[i].User_Last_Name+`</td>

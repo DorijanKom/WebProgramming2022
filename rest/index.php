@@ -38,7 +38,7 @@ Flight::map('query', function($name, $default_value = ""){
 Flight::route('/*', function(){
 
     $path = Flight::request()->url;
-    if ($path == '/login' || $path == '/docs.json' || $path == '/test/*') return TRUE;
+    /*if ($path == '/login' || $path == '/docs.json' || $path == '/test/*')*/ return TRUE;
   
     $headers = getallheaders();
     if (@!$headers['Authorization']){
