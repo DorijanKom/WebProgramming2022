@@ -160,27 +160,30 @@ var OrdersService = {
     },
 
     delete: function(id){
-      $(".orders-button").attr("disabled",true);
-      $.ajax({
-        url: 'rest/orders/'+id,
-        type: 'DELETE',
-        beforeSend: function(xhr){
-          xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-        },
-        success: function(result){
-            $('#orders_list').html(`<div id="orders_list" class="row">
-            <div class="d-flex justify-content-center">
-                <div class="spinner-border" role="status">
-                  <span class="sr-only"></span>
-                </div>
-            </div>
-          </div>`);
-          OrdersService.list();
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-          toastr.error(XMLHttpRequest.responseJSON.message);
-          usersService.logout();
-        }
+      $("#deleteOrder").modal("show");
+      $("#deleteYes").click(function(){
+        $.ajax({
+          url: 'rest/orders/'+id,
+          type: 'DELETE',
+          beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
+          },
+          success: function(result){
+            $("#deleteOrder").modal("hide");
+              $('#orders_list').html(`<div id="orders_list" class="row">
+              <div class="d-flex justify-content-center">
+                  <div class="spinner-border" role="status">
+                    <span class="sr-only"></span>
+                  </div>
+              </div>
+            </div>`);
+            OrdersService.list();
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown) {
+            toastr.error(XMLHttpRequest.responseJSON.message);
+            usersService.logout();
+          }
+        })
       })
     },
 
