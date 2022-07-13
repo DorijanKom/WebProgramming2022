@@ -15,7 +15,7 @@ Flight::route('GET /orders',function(){
 });
 
 /**
- * @OA\Get(path="/orders/{id}", tags={"orders"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Get(path="/orders/{id}", tags={"orders"}, summary="Returns an order by id",security={{"ApiKeyAuth": {}}},
  *     @OA\Parameter(in="path", name="id", example=1, description="Id of order"),
  *     @OA\Response(response="200", description="Fetch individual order")
  * )
@@ -29,6 +29,7 @@ Flight::route('GET /orders/@id',function($id){
 *     path="/orders",
 *     description="Add a new order to db",
 *     tags={"orders"},
+*     summary="Adds a new order to the db ",
 *     security={{"ApiKeyAuth": {}}},
 *     @OA\RequestBody(description="Basic order info", required=true,
 *       @OA\MediaType(mediaType="application/json",
@@ -70,6 +71,7 @@ Flight::route('POST /orders', function(){
 *     path="/orders/{id}",
 *     description="Add a new order to db",
 *     tags={"orders"},
+*     summary="Updates an order in db by id",
 *     @OA\Parameter(in="path", name="id", example=1, description="ID of the order we want to update"),
 *     security={{"ApiKeyAuth": {}}},
 *     @OA\RequestBody(description="Basic order info", required=true,
@@ -112,6 +114,7 @@ Flight::route('PUT /orders/@id',function($id){
 *   @OA\Delete(
 *     path="/orders/{id}", security={{"ApiKeyAuth": {}}},
 *     description="Delete order",
+*     summary="Deletes an order from db by its id",
 *     tags={"orders"},
 *     @OA\Parameter(in="path", name="id", example=1, description="Id of order"),
 *     @OA\Response(

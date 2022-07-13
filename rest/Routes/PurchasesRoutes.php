@@ -15,7 +15,7 @@ Flight::route('GET /purchases',function(){
 });
 
 /**
- * @OA\Get(path="/purchases/{id}", tags={"purchases"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Get(path="/purchases/{id}", tags={"purchases"}, summary="Returns a single purchase by id", security={{"ApiKeyAuth": {}}},
  *     @OA\Parameter(in="path", name="id", example=1, description="Id of purchase"),
  *     @OA\Response(response="200", description="Fetch individual purchase")
  * )
@@ -29,6 +29,7 @@ Flight::route('GET /purchases/@id',function($id){
 *     path="/purchases",
 *     description="Add a new purchase to db",
 *     tags={"purchases"},
+*     summary="Adds a new purchase ",
 *     security={{"ApiKeyAuth": {}}},
 *     @OA\RequestBody(description="Basic order info", required=true,
 *       @OA\MediaType(mediaType="application/json",

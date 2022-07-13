@@ -18,31 +18,14 @@
         Flight::json(Flight::usersService()->getAll());
     });
 
-    /**
-     *  Returns one from the table by ID
-     */
+/**
+ * @OA\Get(path="/users/{id}", tags={"users"}, summary="Returns a single user by id", security={{"ApiKeyAuth": {}}},
+ *     @OA\Parameter(in="path", name="id", example=1, description="Id of user"),
+ *     @OA\Response(response="200", description="Fetch individual user")
+ * )
+ */
     Flight::route('GET /users/@id',function($id){
         Flight::json(Flight::usersService()->getByID($id));
-    });
-
-    /**
-     *  Adds new data to the table
-     */
-    Flight::route('POST /users', function(){
-        $request=Flight::request();
-        Flight::usersService()->add($request->data->getData());
-        Flight::json(['message' => 'updated']);
-    });
-
-    Flight::route('PUT /users/@id',function($id){
-        $request=Flight::request();
-        Flight::usersService()->update($request->data->getData(),$id);
-        Flight::json(['message' => 'updated']);
-    });
-
-    Flight::route('DELETE /users/@id',function($id){
-        Flight::usersService()->delete($id);
-        Flight::json(['message'=>'deleted']);
     });
 
     /**

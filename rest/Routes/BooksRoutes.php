@@ -16,7 +16,7 @@ Flight::route('GET /books',function(){
 });
 
 /**
- * @OA\Get(path="/books/{id}", tags={"books"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Get(path="/books/{id}", tags={"books"}, summary="Returns a single book by id", security={{"ApiKeyAuth": {}}},
  *     @OA\Parameter(in="path", name="id", example=1, description="Id of book"),
  *     @OA\Response(response="200", description="Fetch individual book")
  * )
@@ -27,7 +27,7 @@ Flight::route('GET /books/@id',function($id){
 
 
 /**
- * @OA\Get(path="/books/search/{name}", tags={"books"}, security={{"ApiKeyAuth": {}}},
+ * @OA\Get(path="/books/search/{name}", tags={"books"}, summary="Returns a number of books that match the given paramater ", security={{"ApiKeyAuth": {}}},
  *     @OA\Parameter(in="path", name="name", description="Searches a book through its name"),
  *     @OA\Response(response="200", description="Success")
  * )
@@ -38,8 +38,7 @@ Flight::route('GET /books/search/@name', function($name){
 
 
 /**
- * @OA\Get(path="/search_books/writer", tags={"books"}, security={{"ApiKeyAuth": {}}},
- *         summary="Return the provided books from the api ",
+ * @OA\Get(path="/search_books/writer", tags={"books"}, summary="Return the provided books from the api ",security={{"ApiKeyAuth": {}}},
  *         @OA\Parameter(in="query", name="name", description="Search criteria"),
  *         @OA\Parameter(in="query", name="lastname", description="Search criteria"),
  *         @OA\Response( response=200, description="List of pets.")
@@ -56,6 +55,7 @@ Flight::route('GET /search_books/writer', function(){
 *     path="/books",
 *     description="Add a new book to db",
 *     tags={"books"},
+*     summary="Adds a new book to the db",
 *     security={{"ApiKeyAuth": {}}},
 *     @OA\RequestBody(description="Basic book info", required=true,
 *       @OA\MediaType(mediaType="application/json",
@@ -98,6 +98,7 @@ Flight::route('POST /books', function(){
 *     path="/books/{id}",
 *     description="Add a new book to db",
 *     tags={"books"},
+*     summary="Updates the selected book by id",
 *     @OA\Parameter(in="path", name="id", example=1, description="ID of the book we want to update"),
 *     security={{"ApiKeyAuth": {}}},
 *     @OA\RequestBody(description="Basic book info", required=true,
