@@ -49,7 +49,7 @@ var OrdersService = {
                     <tr>
                     <th scope="row">
                         <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-primary btn-sm orders-button" onclick="OrdersService.get(`+data[i].id+`)">Edit</button>
+                        <button type="button" class="btn btn-light btn-sm orders-button" onclick="OrdersService.get(`+data[i].id+`)">Edit</button>
                         <button type="button" class="btn btn-danger btn-sm orders-button" onclick="OrdersService.delete(`+data[i].id+`)">Delete</button>
                         </div>
                     </th>

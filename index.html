@@ -172,34 +172,34 @@
     </div>
   </div>
 
-    <!-- Modal-Add-Writers -->
-    <div class="modal fade" id="addElementWriter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    
+    <!--Modal-Search-Writers-->
+    <div class="modal fade" id="searchWriter" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form id="addWritersForm">
+          <form id="searchWritersForm">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Writer</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Search Writer</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
               <div class="form-group">
-                <label for="writerName" class="form-label">Writer Name</label>
-                <input name="Writer_Name" type="text" id="writerName" class="form-control required" placeholder="Enter writer name">
+                <label for="searchWriterName" class="form-label">Writer Name</label>
+                <input name="Writer_Name" type="text" id="searchWriterName" class="form-control required" placeholder="Enter writer name">
               </div>
               <div class="form-group">
-                <label for="writerLastName" class="form-label">Writer Last Name</label>
-                <input name="Writer_Last_Name" type="text" id="writerLastName" class="form-control required" placeholder="Enter writer last name">
+                <label for="searchWriterLastName" class="form-label">Writer Last Name</label>
+                <input name="Writer_Last_Name" type="text" id="searchWriterLastName" class="form-control required" placeholder="Enter writer last name">
               </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" id="addBookButton" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-warning" onclick="BookService.searchWriter();event.preventDefault();">Search</button>
           </div>
         </form>
         </div>
       </div>
     </div>
-
         <!--Modal-Add-Orders-->
         <div class="modal fade" id="addOrder" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog">
