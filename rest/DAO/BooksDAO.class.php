@@ -14,7 +14,7 @@
             FROM Orders
             INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID; */
 
-            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, p.name, b.Year_of_publishing, b.Book_price, b.In_inventory, b.is_available ";
+            $stm="SELECT b.id, b.Book_Name,w.Writer_Name ,w.Writer_Last_Name, p.name, b.Year_of_publishing, b.Book_price, b.In_inventory, b.is_available ";
             $stm.="FROM Books b ";
             $stm.="LEFT OUTER JOIN BooksAndWriters baw ON b.id = baw.bookid ";
             $stm.="LEFT OUTER JOIN Writers w ON baw.writerid = w.id ";
@@ -64,7 +64,20 @@
             $stm.="LEFT OUTER JOIN BooksAndWriters baw ON b.id = baw.bookid ";
             $stm.="LEFT OUTER JOIN Writers w ON baw.writerid = w.id ";
             $stm.="JOIN Publishers p ON p.id = b.Publisher ";
-            $stm.="WHERE LOWER(b.Book_Name) LIKE '%".$name."%'";
+            $stm.="WHERE LOWER(b.Book_Name) LIKE '%".$name."%' OR LOWER(p.name) LIKE '%".$name."%' OR LOWER(CONCAT(w.Writer_Name,' ',w.Writer_Last_Name)) LIKE '%".$name."%'";
+            $result= $this->conn->prepare($stm);
+            $result->execute();
+            return $result->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function search_publisher($name){
+            $name=strtolower($name);
+            $stm="SELECT b.id, b.Book_Name, w.Writer_Name, w.Writer_Last_Name, p.name, b.Year_of_publishing, b.Book_price, b.In_inventory, b.is_available ";
+            $stm.="FROM Books b ";
+            $stm.="LEFT OUTER JOIN BooksAndWriters baw ON b.id = baw.bookid ";
+            $stm.="LEFT OUTER JOIN Writers w ON baw.writerid = w.id ";
+            $stm.="JOIN Publishers p ON p.id = b.Publisher ";
+            $stm.="WHERE LOWER(p.name) LIKE '%".$name."%'";
             $result= $this->conn->prepare($stm);
             $result->execute();
             return $result->fetchAll(PDO::FETCH_ASSOC);
