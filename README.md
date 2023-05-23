@@ -63,6 +63,12 @@ The features included in the release:
     - /rest/docs endpoint, access swagger documentation
 
 
+**For trying out the app, use these credentials**
+
+    email: dorijan.komsic@stu.ibu.edu.ba
+
+    password: 12345
+
 The project was made using HTML, CSS and PHP, while also using jQuery library and FlightPHP framework.
 
 ---
