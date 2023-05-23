@@ -58,6 +58,10 @@ The features included in the release:
     - POST /writers endpoint, add a new writer to db
     - PUT /writers/@id endpoint, updates a writer in db by id
 
+### Documentation
+
+    - /rest/docs endpoint, access swagger documentation
+
 
 ``The project was made using HTML, CSS and PHP, while also using jQuery library and FlightPHP framework.``
 
