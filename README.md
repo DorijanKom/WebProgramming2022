@@ -63,7 +63,7 @@ The features included in the release:
     - /rest/docs endpoint, access swagger documentation
 
 
-``The project was made using HTML, CSS and PHP, while also using jQuery library and FlightPHP framework.``
+The project was made using HTML, CSS and PHP, while also using jQuery library and FlightPHP framework.
 
 ---
 > Dorijan Komšić and Kenan Lokvančić,
