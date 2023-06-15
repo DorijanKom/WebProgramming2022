@@ -11,7 +11,7 @@
  *      @OA\Response(response=200,description="List of books")
  * )
  */
-Flight::route('GET /books',function(){
+Flight::route('GET /books', function () {
     Flight::json(Flight::booksService()->getBooksWithWriterNames());
 });
 
@@ -21,7 +21,7 @@ Flight::route('GET /books',function(){
  *     @OA\Response(response="200", description="Fetch individual book")
  * )
  */
-Flight::route('GET /books/@id',function($id){
+Flight::route('GET /books/@id', function ($id) {
     Flight::json(Flight::booksService()->getByIDWithWriterNames($id));
 });
 
@@ -32,7 +32,7 @@ Flight::route('GET /books/@id',function($id){
  *     @OA\Response(response="200", description="Success")
  * )
  */
-Flight::route('GET /books/search/@name', function($name){
+Flight::route('GET /books/search/@name', function ($name) {
     Flight::json(Flight::booksService()->searchBook($name));
 });
 
@@ -44,10 +44,10 @@ Flight::route('GET /books/search/@name', function($name){
  *         @OA\Response( response=200, description="List of pets.")
  * )
  */
-Flight::route('GET /search_books/writer', function(){
+Flight::route('GET /search_books/writer', function () {
     $name = Flight::query('name');
     $lastName = Flight::query('lastname');
-    Flight::json(Flight::booksService()->searchWriter($name,$lastName));
+    Flight::json(Flight::booksService()->searchWriter($name, $lastName));
 });
 
 /**
@@ -83,10 +83,10 @@ Flight::route('GET /search_books/writer', function(){
 *     )
 * )
 */
-Flight::route('POST /books', function(){
+Flight::route('POST /books', function () {
     $data=Flight::request()->data->getData();
     $book = Flight::booksService()->addBookAndWriter($data);
-    if($book==null){
+    if ($book==null) {
         Flight::json(["error"=>"Cannot add an existing book!"]);
     } else {
         Flight::json(['message' => 'Book added']);
@@ -127,13 +127,12 @@ Flight::route('POST /books', function(){
 *     )
 * )
 */
-Flight::route('PUT /books/@id',function($id){
+Flight::route('PUT /books/@id', function ($id) {
     $request=Flight::request();
-    $book = Flight::booksService()->updateBookAndWriter($request->data->getData(),$id);
-    if($book==null){
+    $book = Flight::booksService()->updateBookAndWriter($request->data->getData(), $id);
+    if ($book==null) {
         Flight::json(["error"=>"Cannot add an existing book!"]);
     } else {
         Flight::json(['message' => 'updated']);
     }
 });
-?>

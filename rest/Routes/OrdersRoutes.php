@@ -10,7 +10,7 @@
  *      @OA\Response(response=200,description="List of orders")
  * )
  */
-Flight::route('GET /orders',function(){
+Flight::route('GET /orders', function () {
     Flight::json(Flight::ordersService()->getOrdersAndUsers());
 });
 
@@ -20,7 +20,7 @@ Flight::route('GET /orders',function(){
  *     @OA\Response(response="200", description="Fetch individual order")
  * )
  */
-Flight::route('GET /orders/@id',function($id){
+Flight::route('GET /orders/@id', function ($id) {
     Flight::json(Flight::ordersService()->getOrderByID($id));
 });
 
@@ -56,10 +56,10 @@ Flight::route('GET /orders/@id',function($id){
 *     )
 * )
 */
-Flight::route('POST /orders', function(){
+Flight::route('POST /orders', function () {
     $request=Flight::request();
     $order=Flight::ordersService()->addOrderWithUser($request->data->getData());
-    if($order==null){
+    if ($order==null) {
         Flight::json(['error' => 'Please add book entry before creating order!']);
     } else {
         Flight::json(['message' => 'updated']);
@@ -99,10 +99,10 @@ Flight::route('POST /orders', function(){
 *     )
 * )
 */
-Flight::route('PUT /orders/@id',function($id){
+Flight::route('PUT /orders/@id', function ($id) {
     $request=Flight::request();
-    $order = Flight::ordersService()->updateOrder($request->data->getData(),$id);
-    if($order==null){
+    $order = Flight::ordersService()->updateOrder($request->data->getData(), $id);
+    if ($order==null) {
         Flight::json(['error' => 'Please add book entry before creating order!']);
     } else {
         Flight::json(['message' => 'updated']);
@@ -110,7 +110,7 @@ Flight::route('PUT /orders/@id',function($id){
 });
 
 
-/** 
+/**
 *   @OA\Delete(
 *     path="/orders/{id}", security={{"ApiKeyAuth": {}}},
 *     description="Delete order",
@@ -127,8 +127,7 @@ Flight::route('PUT /orders/@id',function($id){
 *     )
 * )
 */
-Flight::route('DELETE /orders/@id',function($id){
+Flight::route('DELETE /orders/@id', function ($id) {
     Flight::ordersService()->delete($id);
     Flight::json(['message'=>'deleted']);
 });
-?>

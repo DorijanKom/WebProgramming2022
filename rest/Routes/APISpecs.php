@@ -7,14 +7,13 @@
  *     )),
  */
 
- /**
- * @OA\OpenApi(
- *   @OA\Server(
- *       url="/WebProgramming2022/rest",
- *       description="Dev enviorment"
- *   )
- * )
- * 
- * @OA\SecurityScheme(securityScheme="ApiKeyAuth", type="apiKey", in="header", name="Authorization" )
- */
-?>
+/**
+* @OA\OpenApi(
+*   @OA\Server(
+*       url="/WebProgramming2022/rest",
+*       description="Dev enviorment"
+*   )
+* )
+*
+* @OA\SecurityScheme(securityScheme="ApiKeyAuth", type="apiKey", in="header", name="Authorization" )
+*/

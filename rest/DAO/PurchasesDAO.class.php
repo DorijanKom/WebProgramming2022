@@ -2,14 +2,25 @@
 
     require_once __DIR__.'/BaseDAO.class.php';
 
-    class PurchaseDAO extends BaseDAO{
+    class PurchaseDAO extends BaseDAO
+    {
         
+        private static $instance = null;
+
         public function __construct()
         {
-            parent::__construct("Purchase");    
+            parent::__construct("Purchase");
         }
 
-        public function getPurchaseAndBookAndUserById($id){
+        public static function getInstance() {
+            if (!isset(self::$instance)) {
+              self::$instance = new self();
+            }
+            return self::$instance;
+        }
+
+        public function getPurchaseAndBookAndUserById($id)
+        {
             $stmt="SELECT p.id, b.Book_Name, b.Book_price,p.Time_of_Purchase, p.Date_of_Purchase, u.User_Name, u.User_Last_Name ";
             $stmt.="FROM Purchase p ";
             $stmt.="JOIN Books b ON b.id = p.BookID ";
@@ -20,7 +31,8 @@
             return @reset($result->fetchAll(PDO::FETCH_ASSOC));
         }
 
-        public function getPurchaseAndBookAndUser(){
+        public function getPurchaseAndBookAndUser()
+        {
             $stmt="SELECT p.id, b.Book_Name, b.Book_price,p.Time_of_Purchase, p.Date_of_Purchase, u.User_Name, u.User_Last_Name ";
             $stmt.="FROM Purchase p ";
             $stmt.="JOIN Books b ON b.id = p.BookID ";
@@ -31,4 +43,3 @@
             return $result->fetchAll(PDO::FETCH_ASSOC);
         }
     }
-?>

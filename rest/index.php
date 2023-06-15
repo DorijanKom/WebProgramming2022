@@ -16,48 +16,49 @@ require_once __DIR__.'/Services/WritersService.class.php';
 require_once __DIR__.'/Services/PublishersService.class.php';
 require_once __DIR__.'/Services/BooksAndWritersService.class.php';
 
-Flight::register('booksService','BooksService');
-Flight::register('booksAndWritersService','BooksAndWritersService');
-Flight::register('purchasesService','PurchasesService');
-Flight::register('ordersService','OrdersService');
-Flight::register('writersService','WritersService');
-Flight::register('usersService','UsersService');
-Flight::register('publishersService','PublishersService');
+Flight::register('booksService', 'BooksService');
+Flight::register('booksAndWritersService', 'BooksAndWritersService');
+Flight::register('purchasesService', 'PurchasesService');
+Flight::register('ordersService', 'OrdersService');
+Flight::register('writersService', 'WritersService');
+Flight::register('usersService', 'UsersService');
+Flight::register('publishersService', 'PublishersService');
 
-Flight::map('error', function(Exception $e){
+Flight::map('error', function (Exception $e) {
     Flight::json(['message'=> $e->getMessage()], 500);
 });
 
-Flight::map('query', function($name, $default_value = ""){
-  $request = Flight::request();
-  $query_param = @$request->query->getData()[$name];
-  $query_param = $query_param ? $query_param : $default_value;
-  return rawurldecode($query_param);
+Flight::map('query', function ($name, $default_value = "") {
+    $request = Flight::request();
+    $query_param = @$request->query->getData()[$name];
+    $query_param = $query_param ? $query_param : $default_value;
+    return rawurldecode($query_param);
 });
 
-Flight::route('/*', function(){
-
+Flight::route('/*', function () {
     $path = Flight::request()->url;
-    if ($path == '/login' || $path == '/docs.json' || $path == '/test/*') return TRUE;
-  
-    $headers = getallheaders();
-    if (@!$headers['Authorization']){
-      Flight::json(["message" => "Authorization is missing"], 403);
-      return FALSE;
-    }else{
-      try {
-        $decoded = (array)JWT::decode($headers['Authorization'], new Key(Config::JWT_SECRET(), 'HS256'));
-        Flight::set('user', $decoded);
-        return TRUE;
-      } catch (\Exception $e) {
-        Flight::json(["message" => "Authorization token is not valid"], 403);
-        return FALSE;
-      }
+    if ($path == '/login' || $path == '/docs.json' || $path == '/test/*') {
+        return true;
     }
-  });
 
-  // REST api documentation end-point
-  Flight::route('GET /docs.json',function(){
+    $headers = getallheaders();
+    if (@!$headers['Authorization']) {
+        Flight::json(["message" => "Authorization is missing"], 403);
+        return false;
+    } else {
+        try {
+            $decoded = (array)JWT::decode($headers['Authorization'], new Key(Config::JWT_SECRET(), 'HS256'));
+            Flight::set('user', $decoded);
+            return true;
+        } catch (\Exception $e) {
+            Flight::json(["message" => "Authorization token is not valid"], 403);
+            return false;
+        }
+    }
+});
+
+// REST api documentation end-point
+Flight::route('GET /docs.json', function () {
     $openapi = \OpenApi\Generator::scan(['Routes']);
     header('Content-Type: application/json');
     echo $openapi->toJson();
@@ -73,4 +74,3 @@ require_once __DIR__.'/Routes/BooksAndWritersRoutes.php';
 
 
 Flight::start();
-?>

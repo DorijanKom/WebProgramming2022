@@ -10,7 +10,7 @@
  *      @OA\Response(response=200,description="List of baws")
  * )
  */
-Flight::route('GET /baw',function(){
+Flight::route('GET /baw', function () {
     Flight::json(Flight::booksAndWritersService()->getAll());
 });
 
@@ -20,7 +20,7 @@ Flight::route('GET /baw',function(){
  *     @OA\Response(response="200", description="Fetch individual baw")
  * )
  */
-Flight::route('GET /baw/@id',function($id){
+Flight::route('GET /baw/@id', function ($id) {
     Flight::json(Flight::booksAndWritersService()->getByID($id));
 });
 
@@ -52,7 +52,7 @@ Flight::route('GET /baw/@id',function($id){
 *     )
 * )
 */
-Flight::route('POST /baw', function(){
+Flight::route('POST /baw', function () {
     $request=Flight::request();
     Flight::booksAndWritersService()->add($request->data->getData());
     Flight::json(['message' => 'updated']);
@@ -87,9 +87,8 @@ Flight::route('POST /baw', function(){
 *     )
 * )
 */
-Flight::route('PUT /baw/@id',function($id){
+Flight::route('PUT /baw/@id', function ($id) {
     $request=Flight::request();
-    Flight::booksAndWritersService()->update($request->data->getData(),$id);
+    Flight::booksAndWritersService()->update($request->data->getData(), $id);
     Flight::json(['message' => 'updated']);
 });
-?>
