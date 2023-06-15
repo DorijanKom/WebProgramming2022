@@ -69,7 +69,7 @@ The features included in the release:
 
     password: 12345
 
-The project was made using HTML, CSS and PHP, while also using jQuery library and FlightPHP framework.
+The project was made using HTML, CSS and PHP, while also using the jQuery library and FlightPHP framework.
 
 ---
 > Dorijan Komšić and Kenan Lokvančić,
