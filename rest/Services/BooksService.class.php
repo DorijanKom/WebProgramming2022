@@ -21,27 +21,22 @@
 
         public function getBooksWithWriterNames()
         {
-            return $this->dao->get_books_with_writer_names();
+            return $this->dao->getBooksWithWriterNames();
         }
 
         public function getByIDWithWriterNames($id)
         {
-            return $this->dao->get_by_id_with_writer_names($id);
+            return $this->dao->getByIdWithWriterNames($id);
         }
 
         public function searchBook($name)
         {
-            return $this->dao->search_book($name);
-        }
-
-        public function searchWriter($name, $lastName)
-        {
-            return $this->dao->search_writer($name, $lastName);
+            return $this->dao->searchBook($name);
         }
 
         public function findBook($book)
         {
-            return $this->dao->find_book($book);
+            return $this->dao->findBook($book);
         }
 
 
@@ -68,8 +63,7 @@
                                 'Book_price' => $bookDescriptor['Book_price'],
                                 'In_inventory' => $bookDescriptor['In_inventory']]);
 
-
-                $book = $this->dao->get_by_id_with_writer_names($addedBook['id']);
+                $book = $this->getByIDWithWriterNames($addedBook['id']);
                 $baw = $this->booksAndWritersDAO->add(['bookid'=>$book['id'],'writerid'=>$writer['id']]);
 
 
@@ -101,7 +95,7 @@
                                           'In_inventory' => $bookDescriptor['In_inventory']], $id);
 
 
-                $book = $this->dao->get_by_id_with_writer_names($id);
+                $book = $this->getByIDWithWriterNames($id);
 
                 $baw = $this->booksAndWritersDAO->getBaW($book['id']);
 

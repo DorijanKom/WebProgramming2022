@@ -38,19 +38,6 @@ Flight::route('GET /books/search/@name', function ($name) {
 
 
 /**
- * @OA\Get(path="/search_books/writer", tags={"books"}, summary="Return the provided books from the api ",security={{"ApiKeyAuth": {}}},
- *         @OA\Parameter(in="query", name="name", description="Search criteria"),
- *         @OA\Parameter(in="query", name="lastname", description="Search criteria"),
- *         @OA\Response( response=200, description="List of pets.")
- * )
- */
-Flight::route('GET /search_books/writer', function () {
-    $name = Flight::query('name');
-    $lastName = Flight::query('lastname');
-    Flight::json(Flight::booksService()->searchWriter($name, $lastName));
-});
-
-/**
 * @OA\Post(
 *     path="/books",
 *     description="Add a new book to db",

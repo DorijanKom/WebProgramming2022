@@ -20,7 +20,6 @@ var BookService = {
               SPApp.handleSectionVisibility("#view_books");
               var html=`<div class="book-change" class="row">
               <button class="btn btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
-              <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#searchWriter" style="margin-bottom: 10px"> <i class="bi bi-search"> Search Writer</i></button>
             </div>`;
               for(let i=0;i<data.length;i++){
                   html+=`
@@ -226,50 +225,5 @@ var BookService = {
             usersService.logout();
           }
       });
-    },
-
-    searchWriter: function(){
-      var writerName = document.getElementById("searchWriterName").value;
-      var writerLastName = document.getElementById("searchWriterLastName").value;
-      console.log(writerName+" "+writerLastName);
-      $.ajax({
-        url: "rest/search_books/writer?name="+writerName+"&lastname="+writerLastName,
-        type: "GET",
-        beforeSend: function(xhr){
-          xhr.setRequestHeader('Authorization', localStorage.getItem('token'));
-        },
-        success: function(data){
-          $("#searchWriter").modal("hide");
-          SPApp.handleSectionVisibility("#view_search_by_writers");
-          var html=`<div class="book-change" class="row">
-              <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addElement" style="margin-bottom: 10px"> Add Book </button>
-              <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#searchWriter" style="margin-bottom: 10px"> <i class="bi bi-search"> Search Writer</i></button>
-            </div>`;
-          for(let i=0;i<data.length;i++){
-      
-            html+=`
-            <div class="col-lg-3 container overflow-hidden" id="view_books">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="https://www.pngall.com/wp-content/uploads/2018/05/Books-PNG-File.png" alt="Card image cap">
-                <div class="card-body">
-                    <h4 class="card-title">`+data[i].Writer_Name +` ` +data[i].Writer_Last_Name+`</h4>
-                    <h5 class="card-title" id="displayBookName">`+data[i].Book_Name+`</h5>
-                    <p class="card-text">`+data[i].name +`
-                    <br>`+data[i].Book_price+`KM</p>
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn btn-secondary books-button" onclick="BookService.get(`+data[i].id+`)">View Info</button>
-                        <button type="button" class="btn btn-warning books-button" onclick="PurchaseService.sell(`+data[i].id+`)">Sell</button>
-                    </div>
-                </div>
-                </div>
-                </div>`;
-        }
-        $("#view_search_by_writers").html(html);
-        },
-        error: function(XMLHttpRequest, textStatus, errorThrown) {
-          toastr.error(XMLHttpRequest.responseJSON.message);
-          usersService.logout();
-        }
-      })
     }
 }
