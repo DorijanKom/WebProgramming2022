@@ -29,7 +29,7 @@
 
         public function addOrderWithUser($orderDescriptor)
         {
-            $book = $this->bookDAO->get_book_by_name($orderDescriptor['book_name']);
+            $book = $this->bookDAO->getBookByName($orderDescriptor['book_name']);
             $user = $this->userDAO->getUserByName($orderDescriptor['User_Name'], $orderDescriptor['User_Last_Name']);
 
             if (!isset($book['id'])) {
